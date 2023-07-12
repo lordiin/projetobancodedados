@@ -1,0 +1,20 @@
+{
+  "applications": "*",
+  "entityTableName": "denuncia",
+  "fields": [
+    {
+      "fieldName": "motivo",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Denuncia",
+  "relationships": [
+    {
+      "otherEntityName": "avaliacao",
+      "relationshipName": "avaliacao",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}
