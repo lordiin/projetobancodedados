@@ -1,0 +1,24 @@
+{
+  "applications": "*",
+  "entityTableName": "professor",
+  "fields": [
+    {
+      "fieldName": "nome",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Professor",
+  "relationships": [
+    {
+      "otherEntityName": "departamento",
+      "relationshipName": "departamento",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

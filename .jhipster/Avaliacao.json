@@ -1,0 +1,25 @@
+{
+  "applications": "*",
+  "entityTableName": "avaliacao",
+  "fields": [
+    {
+      "fieldName": "descricao",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nota",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "Avaliacao",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "turma",
+      "relationshipName": "turma",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

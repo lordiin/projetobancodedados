@@ -1,0 +1,17 @@
+{
+  "applications": "*",
+  "entityTableName": "departamento",
+  "fields": [
+    {
+      "fieldName": "codigo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nome",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Departamento",
+  "relationships": [],
+  "service": "serviceClass"
+}

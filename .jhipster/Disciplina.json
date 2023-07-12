@@ -1,0 +1,24 @@
+{
+  "applications": "*",
+  "entityTableName": "disciplina",
+  "fields": [
+    {
+      "fieldName": "codigo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nome",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Disciplina",
+  "relationships": [
+    {
+      "otherEntityName": "departamento",
+      "relationshipName": "departamento",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

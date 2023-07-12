@@ -1,0 +1,51 @@
+{
+  "applications": "*",
+  "entityTableName": "turma",
+  "fields": [
+    {
+      "fieldName": "turma",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "periodo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "professor",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "horario",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "vagasOcupadas",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "totalVagas",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "local",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Turma",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "disciplina",
+      "relationshipName": "disciplina",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "departamento",
+      "relationshipName": "departamento",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}
