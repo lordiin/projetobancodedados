@@ -1,0 +1,2 @@
+org.springframework.test.context.ContextCustomizerFactory=\
+projetobancodedados.app.config.SqlTestContainersSpringContextCustomizerFactory
