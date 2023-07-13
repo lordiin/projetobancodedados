@@ -1,0 +1,150 @@
+<div>
+  <h2 id="page-heading" data-cy="AvaliacaoHeading">
+    <span>Avaliações</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Atualizar Lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-avaliacao"
+        [routerLink]="['/avaliacao/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Criar uma nova Avaliação </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="avaliacaos?.length === 0">
+    <span>Nenhuma avaliação encontrada</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="avaliacaos && avaliacaos.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span>ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="descricao">
+            <div class="d-flex">
+              <span>Descrição</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="nota">
+            <div class="d-flex">
+              <span>Nota</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="turma.id">
+            <div class="d-flex">
+              <span>Turma</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="turma.id">
+            <div class="d-flex">
+              <span>User</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let avaliacao of avaliacaos; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/avaliacao', avaliacao.id, 'view']">{{ avaliacao.id }}</a>
+          </td>
+          <td>{{ avaliacao.descricao }}</td>
+          <td>{{ avaliacao.nota }}</td>
+          <td>
+            <div *ngIf="avaliacao.turma">
+              <a [routerLink]="['/turma', avaliacao.turma.id, 'view']">{{ avaliacao.turma.id }}</a>
+            </div>
+          </td>
+          <td>
+            {{ avaliacao?.user?.id }}
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                (click)="delete(avaliacao)"
+                class="btn btn-danger btn-sm"
+                data-cy="entityDeleteButton"
+                *jhiHasAnyAuthority="'ROLE_ADMIN'"
+              >
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Deletar</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/avaliacao', avaliacao.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">Visualizar</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/avaliacao', avaliacao.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Editar</span>
+              </button>
+
+              <button
+                type="submit"
+                (click)="denunciar(avaliacao)"
+                class="btn btn-danger btn-sm"
+                data-cy="entityDeleteButton"
+                *jhiHasAnyAuthority="'ROLE_USER'"
+              >
+                <fa-icon icon="cancel"></fa-icon>
+                <span class="d-none d-md-inline">Denunciar</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="avaliacaos && avaliacaos.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

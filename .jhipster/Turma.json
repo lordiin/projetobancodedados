@@ -1,5 +1,6 @@
 {
   "applications": "*",
+  "changelogDate": "20230712060816",
   "entityTableName": "turma",
   "fields": [
     {
@@ -47,5 +48,6 @@
       "relationshipType": "many-to-one"
     }
   ],
+  "searchEngine": "no",
   "service": "serviceClass"
 }

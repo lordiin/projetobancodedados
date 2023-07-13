@@ -1,0 +1,115 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-turma-heading" data-cy="TurmaCreateUpdateHeading">Create or edit a Turma</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_turma">Turma</label>
+          <input type="text" class="form-control" name="turma" id="field_turma" data-cy="turma" formControlName="turma" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_periodo">Periodo</label>
+          <input type="text" class="form-control" name="periodo" id="field_periodo" data-cy="periodo" formControlName="periodo" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_professor">Professor</label>
+          <input type="text" class="form-control" name="professor" id="field_professor" data-cy="professor" formControlName="professor" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_horario">Horario</label>
+          <input type="text" class="form-control" name="horario" id="field_horario" data-cy="horario" formControlName="horario" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_vagasOcupadas">Vagas Ocupadas</label>
+          <input
+            type="text"
+            class="form-control"
+            name="vagasOcupadas"
+            id="field_vagasOcupadas"
+            data-cy="vagasOcupadas"
+            formControlName="vagasOcupadas"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_totalVagas">Total Vagas</label>
+          <input
+            type="text"
+            class="form-control"
+            name="totalVagas"
+            id="field_totalVagas"
+            data-cy="totalVagas"
+            formControlName="totalVagas"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_local">Local</label>
+          <input type="text" class="form-control" name="local" id="field_local" data-cy="local" formControlName="local" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_disciplina">Disciplina</label>
+          <select
+            class="form-control"
+            id="field_disciplina"
+            data-cy="disciplina"
+            name="disciplina"
+            formControlName="disciplina"
+            [compareWith]="compareDisciplina"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="disciplinaOption" *ngFor="let disciplinaOption of disciplinasSharedCollection">
+              {{ disciplinaOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_departamento">Departamento</label>
+          <select
+            class="form-control"
+            id="field_departamento"
+            data-cy="departamento"
+            name="departamento"
+            formControlName="departamento"
+            [compareWith]="compareDepartamento"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="departamentoOption" *ngFor="let departamentoOption of departamentosSharedCollection">
+              {{ departamentoOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

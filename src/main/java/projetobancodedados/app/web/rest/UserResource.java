@@ -64,8 +64,9 @@ public class UserResource {
         Arrays.asList(
             "id",
             "login",
-            "firstName",
-            "lastName",
+            "imagem",
+            "nome",
+            "sobrenome",
             "email",
             "activated",
             "langKey",

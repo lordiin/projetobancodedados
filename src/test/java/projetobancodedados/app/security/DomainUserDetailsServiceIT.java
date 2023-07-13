@@ -44,8 +44,8 @@ class DomainUserDetailsServiceIT {
         userOne.setPassword(RandomStringUtils.randomAlphanumeric(60));
         userOne.setActivated(true);
         userOne.setEmail(USER_ONE_EMAIL);
-        userOne.setFirstName("userOne");
-        userOne.setLastName("doe");
+        userOne.setNome("userOne");
+        userOne.setSobrenome("doe");
         userOne.setLangKey("en");
         userRepository.save(userOne);
 
@@ -54,8 +54,8 @@ class DomainUserDetailsServiceIT {
         userTwo.setPassword(RandomStringUtils.randomAlphanumeric(60));
         userTwo.setActivated(true);
         userTwo.setEmail(USER_TWO_EMAIL);
-        userTwo.setFirstName("userTwo");
-        userTwo.setLastName("doe");
+        userTwo.setNome("userTwo");
+        userTwo.setSobrenome("doe");
         userTwo.setLangKey("en");
         userRepository.save(userTwo);
 
@@ -64,8 +64,8 @@ class DomainUserDetailsServiceIT {
         userThree.setPassword(RandomStringUtils.randomAlphanumeric(60));
         userThree.setActivated(false);
         userThree.setEmail(USER_THREE_EMAIL);
-        userThree.setFirstName("userThree");
-        userThree.setLastName("doe");
+        userThree.setNome("userThree");
+        userThree.setSobrenome("doe");
         userThree.setLangKey("en");
         userRepository.save(userThree);
     }

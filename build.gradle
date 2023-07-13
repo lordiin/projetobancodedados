@@ -154,6 +154,11 @@ dependencies {
 
     // Use ", version: jhipsterDependenciesVersion, changing: true" if you want
     // to use a SNAPSHOT release instead of a stable release
+    compileOnly 'org.projectlombok:lombok:1.18.28'
+    annotationProcessor 'org.projectlombok:lombok:1.18.28'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.28'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.28'
     implementation "tech.jhipster:jhipster-framework"
     implementation "jakarta.annotation:jakarta.annotation-api"
     implementation "com.fasterxml.jackson.module:jackson-module-jaxb-annotations"

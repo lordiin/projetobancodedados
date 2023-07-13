@@ -1,0 +1,50 @@
+entity Professor {
+	nome String,
+    email String,
+}
+
+entity Disciplina {
+	codigo String,
+	nome String,
+}
+
+entity Turma {
+	turma String,
+    periodo String,
+    professor String,
+    horario String,
+    vagasOcupadas String,
+    totalVagas String,
+    local String,
+}
+
+entity Departamento {
+	codigo String,
+	nome String
+}
+
+entity Avaliacao {
+	descricao String,
+	nota Integer,
+}
+
+entity Denuncia {
+	motivo String,
+}
+
+relationship ManyToOne {
+	Turma{disciplina} to Disciplina,
+    Turma{departamento} to Departamento
+    Disciplina{departamento} to Departamento,
+    Denuncia{avaliacao} to Avaliacao
+}
+
+relationship OneToMany {
+	Professor{departamento} to Departamento,
+    Avaliacao{turma} to Turma
+}
+
+paginate Turma, Avaliacao with pagination
+
+// Use Data Transfer Objects (DTO)
+service all with serviceClass

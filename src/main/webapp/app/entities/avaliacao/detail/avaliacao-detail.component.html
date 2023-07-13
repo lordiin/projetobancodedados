@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="avaliacao">
+      <h2 data-cy="avaliacaoDetailsHeading"><span>Avaliação</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ avaliacao.id }}</span>
+        </dd>
+        <dt><span>Descricao</span></dt>
+        <dd>
+          <span>{{ avaliacao.descricao }}</span>
+        </dd>
+        <dt><span>Nota</span></dt>
+        <dd>
+          <span>{{ avaliacao.nota }}</span>
+        </dd>
+        <dt><span>Turma</span></dt>
+        <dd>
+          <div *ngIf="avaliacao.turma">
+            <a [routerLink]="['/turma', avaliacao.turma.id, 'view']">{{ avaliacao.turma.id }}</a>
+          </div>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+          <div *ngIf="avaliacao.user">{{ avaliacao.user.id }}</div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/avaliacao', avaliacao.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

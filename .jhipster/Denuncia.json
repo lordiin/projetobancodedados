@@ -1,5 +1,6 @@
 {
   "applications": "*",
+  "changelogDate": "20230712060812",
   "entityTableName": "denuncia",
   "fields": [
     {
@@ -16,5 +17,6 @@
       "relationshipType": "many-to-one"
     }
   ],
+  "searchEngine": "no",
   "service": "serviceClass"
 }

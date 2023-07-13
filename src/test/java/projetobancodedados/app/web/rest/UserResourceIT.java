@@ -45,11 +45,11 @@ class UserResourceIT {
     private static final String DEFAULT_EMAIL = "johndoe@localhost";
     private static final String UPDATED_EMAIL = "jhipster@localhost";
 
-    private static final String DEFAULT_FIRSTNAME = "john";
-    private static final String UPDATED_FIRSTNAME = "jhipsterFirstName";
+    private static final String DEFAULT_nome = "john";
+    private static final String UPDATED_nome = "jhipsternome";
 
-    private static final String DEFAULT_LASTNAME = "doe";
-    private static final String UPDATED_LASTNAME = "jhipsterLastName";
+    private static final String DEFAULT_sobrenome = "doe";
+    private static final String UPDATED_sobrenome = "jhipstersobrenome";
 
     private static final String DEFAULT_IMAGEURL = "http://placehold.it/50x50";
     private static final String UPDATED_IMAGEURL = "http://placehold.it/40x40";
@@ -83,8 +83,8 @@ class UserResourceIT {
         user.setPassword(RandomStringUtils.randomAlphanumeric(60));
         user.setActivated(true);
         user.setEmail(RandomStringUtils.randomAlphabetic(5) + DEFAULT_EMAIL);
-        user.setFirstName(DEFAULT_FIRSTNAME);
-        user.setLastName(DEFAULT_LASTNAME);
+        user.setNome(DEFAULT_nome);
+        user.setSobrenome(DEFAULT_sobrenome);
         user.setImageUrl(DEFAULT_IMAGEURL);
         user.setLangKey(DEFAULT_LANGKEY);
         return user;
@@ -114,8 +114,8 @@ class UserResourceIT {
         // Create the User
         AdminUserDTO user = new AdminUserDTO();
         user.setLogin(DEFAULT_LOGIN);
-        user.setFirstName(DEFAULT_FIRSTNAME);
-        user.setLastName(DEFAULT_LASTNAME);
+        user.setNome(DEFAULT_nome);
+        user.setSobrenome(DEFAULT_sobrenome);
         user.setEmail(DEFAULT_EMAIL);
         user.setActivated(true);
         user.setImageUrl(DEFAULT_IMAGEURL);
@@ -131,8 +131,8 @@ class UserResourceIT {
             assertThat(users).hasSize(databaseSizeBeforeCreate + 1);
             User testUser = users.get(users.size() - 1);
             assertThat(testUser.getLogin()).isEqualTo(DEFAULT_LOGIN);
-            assertThat(testUser.getFirstName()).isEqualTo(DEFAULT_FIRSTNAME);
-            assertThat(testUser.getLastName()).isEqualTo(DEFAULT_LASTNAME);
+            assertThat(testUser.getNome()).isEqualTo(DEFAULT_nome);
+            assertThat(testUser.getSobrenome()).isEqualTo(DEFAULT_sobrenome);
             assertThat(testUser.getEmail()).isEqualTo(DEFAULT_EMAIL);
             assertThat(testUser.getImageUrl()).isEqualTo(DEFAULT_IMAGEURL);
             assertThat(testUser.getLangKey()).isEqualTo(DEFAULT_LANGKEY);
@@ -147,8 +147,8 @@ class UserResourceIT {
         AdminUserDTO user = new AdminUserDTO();
         user.setId(DEFAULT_ID);
         user.setLogin(DEFAULT_LOGIN);
-        user.setFirstName(DEFAULT_FIRSTNAME);
-        user.setLastName(DEFAULT_LASTNAME);
+        user.setNome(DEFAULT_nome);
+        user.setSobrenome(DEFAULT_sobrenome);
         user.setEmail(DEFAULT_EMAIL);
         user.setActivated(true);
         user.setImageUrl(DEFAULT_IMAGEURL);
@@ -173,8 +173,8 @@ class UserResourceIT {
 
         AdminUserDTO user = new AdminUserDTO();
         user.setLogin(DEFAULT_LOGIN); // this login should already be used
-        user.setFirstName(DEFAULT_FIRSTNAME);
-        user.setLastName(DEFAULT_LASTNAME);
+        user.setNome(DEFAULT_nome);
+        user.setSobrenome(DEFAULT_sobrenome);
         user.setEmail("anothermail@localhost");
         user.setActivated(true);
         user.setImageUrl(DEFAULT_IMAGEURL);
@@ -199,8 +199,8 @@ class UserResourceIT {
 
         AdminUserDTO user = new AdminUserDTO();
         user.setLogin("anotherlogin");
-        user.setFirstName(DEFAULT_FIRSTNAME);
-        user.setLastName(DEFAULT_LASTNAME);
+        user.setNome(DEFAULT_nome);
+        user.setSobrenome(DEFAULT_sobrenome);
         user.setEmail(DEFAULT_EMAIL); // this email should already be used
         user.setActivated(true);
         user.setImageUrl(DEFAULT_IMAGEURL);
@@ -228,8 +228,8 @@ class UserResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].login").value(hasItem(DEFAULT_LOGIN)))
-            .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRSTNAME)))
-            .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LASTNAME)))
+            .andExpect(jsonPath("$.[*].nome").value(hasItem(DEFAULT_nome)))
+            .andExpect(jsonPath("$.[*].sobrenome").value(hasItem(DEFAULT_sobrenome)))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
             .andExpect(jsonPath("$.[*].imageUrl").value(hasItem(DEFAULT_IMAGEURL)))
             .andExpect(jsonPath("$.[*].langKey").value(hasItem(DEFAULT_LANGKEY)));
@@ -247,8 +247,8 @@ class UserResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.login").value(user.getLogin()))
-            .andExpect(jsonPath("$.firstName").value(DEFAULT_FIRSTNAME))
-            .andExpect(jsonPath("$.lastName").value(DEFAULT_LASTNAME))
+            .andExpect(jsonPath("$.nome").value(DEFAULT_nome))
+            .andExpect(jsonPath("$.sobrenome").value(DEFAULT_sobrenome))
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
             .andExpect(jsonPath("$.imageUrl").value(DEFAULT_IMAGEURL))
             .andExpect(jsonPath("$.langKey").value(DEFAULT_LANGKEY));
@@ -273,8 +273,8 @@ class UserResourceIT {
         AdminUserDTO user = new AdminUserDTO();
         user.setId(updatedUser.getId());
         user.setLogin(updatedUser.getLogin());
-        user.setFirstName(UPDATED_FIRSTNAME);
-        user.setLastName(UPDATED_LASTNAME);
+        user.setNome(UPDATED_nome);
+        user.setSobrenome(UPDATED_sobrenome);
         user.setEmail(UPDATED_EMAIL);
         user.setActivated(updatedUser.isActivated());
         user.setImageUrl(UPDATED_IMAGEURL);
@@ -293,8 +293,8 @@ class UserResourceIT {
         assertPersistedUsers(users -> {
             assertThat(users).hasSize(databaseSizeBeforeUpdate);
             User testUser = users.stream().filter(usr -> usr.getId().equals(updatedUser.getId())).findFirst().get();
-            assertThat(testUser.getFirstName()).isEqualTo(UPDATED_FIRSTNAME);
-            assertThat(testUser.getLastName()).isEqualTo(UPDATED_LASTNAME);
+            assertThat(testUser.getNome()).isEqualTo(UPDATED_nome);
+            assertThat(testUser.getSobrenome()).isEqualTo(UPDATED_sobrenome);
             assertThat(testUser.getEmail()).isEqualTo(UPDATED_EMAIL);
             assertThat(testUser.getImageUrl()).isEqualTo(UPDATED_IMAGEURL);
             assertThat(testUser.getLangKey()).isEqualTo(UPDATED_LANGKEY);
@@ -314,8 +314,8 @@ class UserResourceIT {
         AdminUserDTO user = new AdminUserDTO();
         user.setId(updatedUser.getId());
         user.setLogin(UPDATED_LOGIN);
-        user.setFirstName(UPDATED_FIRSTNAME);
-        user.setLastName(UPDATED_LASTNAME);
+        user.setNome(UPDATED_nome);
+        user.setSobrenome(UPDATED_sobrenome);
         user.setEmail(UPDATED_EMAIL);
         user.setActivated(updatedUser.isActivated());
         user.setImageUrl(UPDATED_IMAGEURL);
@@ -335,8 +335,8 @@ class UserResourceIT {
             assertThat(users).hasSize(databaseSizeBeforeUpdate);
             User testUser = users.stream().filter(usr -> usr.getId().equals(updatedUser.getId())).findFirst().get();
             assertThat(testUser.getLogin()).isEqualTo(UPDATED_LOGIN);
-            assertThat(testUser.getFirstName()).isEqualTo(UPDATED_FIRSTNAME);
-            assertThat(testUser.getLastName()).isEqualTo(UPDATED_LASTNAME);
+            assertThat(testUser.getNome()).isEqualTo(UPDATED_nome);
+            assertThat(testUser.getSobrenome()).isEqualTo(UPDATED_sobrenome);
             assertThat(testUser.getEmail()).isEqualTo(UPDATED_EMAIL);
             assertThat(testUser.getImageUrl()).isEqualTo(UPDATED_IMAGEURL);
             assertThat(testUser.getLangKey()).isEqualTo(UPDATED_LANGKEY);
@@ -354,8 +354,8 @@ class UserResourceIT {
         anotherUser.setPassword(RandomStringUtils.randomAlphanumeric(60));
         anotherUser.setActivated(true);
         anotherUser.setEmail("jhipster@localhost");
-        anotherUser.setFirstName("java");
-        anotherUser.setLastName("hipster");
+        anotherUser.setNome("java");
+        anotherUser.setSobrenome("hipster");
         anotherUser.setImageUrl("");
         anotherUser.setLangKey("en");
         userRepository.saveAndFlush(anotherUser);
@@ -366,8 +366,8 @@ class UserResourceIT {
         AdminUserDTO user = new AdminUserDTO();
         user.setId(updatedUser.getId());
         user.setLogin(updatedUser.getLogin());
-        user.setFirstName(updatedUser.getFirstName());
-        user.setLastName(updatedUser.getLastName());
+        user.setNome(updatedUser.getNome());
+        user.setSobrenome(updatedUser.getSobrenome());
         user.setEmail("jhipster@localhost"); // this email should already be used by anotherUser
         user.setActivated(updatedUser.isActivated());
         user.setImageUrl(updatedUser.getImageUrl());
@@ -394,8 +394,8 @@ class UserResourceIT {
         anotherUser.setPassword(RandomStringUtils.randomAlphanumeric(60));
         anotherUser.setActivated(true);
         anotherUser.setEmail("jhipster@localhost");
-        anotherUser.setFirstName("java");
-        anotherUser.setLastName("hipster");
+        anotherUser.setNome("java");
+        anotherUser.setSobrenome("hipster");
         anotherUser.setImageUrl("");
         anotherUser.setLangKey("en");
         userRepository.saveAndFlush(anotherUser);
@@ -406,8 +406,8 @@ class UserResourceIT {
         AdminUserDTO user = new AdminUserDTO();
         user.setId(updatedUser.getId());
         user.setLogin("jhipster"); // this login should already be used by anotherUser
-        user.setFirstName(updatedUser.getFirstName());
-        user.setLastName(updatedUser.getLastName());
+        user.setNome(updatedUser.getNome());
+        user.setSobrenome(updatedUser.getSobrenome());
         user.setEmail(updatedUser.getEmail());
         user.setActivated(updatedUser.isActivated());
         user.setImageUrl(updatedUser.getImageUrl());
@@ -458,8 +458,8 @@ class UserResourceIT {
         AdminUserDTO userDTO = new AdminUserDTO();
         userDTO.setId(DEFAULT_ID);
         userDTO.setLogin(DEFAULT_LOGIN);
-        userDTO.setFirstName(DEFAULT_FIRSTNAME);
-        userDTO.setLastName(DEFAULT_LASTNAME);
+        userDTO.setNome(DEFAULT_nome);
+        userDTO.setSobrenome(DEFAULT_sobrenome);
         userDTO.setEmail(DEFAULT_EMAIL);
         userDTO.setActivated(true);
         userDTO.setImageUrl(DEFAULT_IMAGEURL);
@@ -471,8 +471,8 @@ class UserResourceIT {
         User user = userMapper.userDTOToUser(userDTO);
         assertThat(user.getId()).isEqualTo(DEFAULT_ID);
         assertThat(user.getLogin()).isEqualTo(DEFAULT_LOGIN);
-        assertThat(user.getFirstName()).isEqualTo(DEFAULT_FIRSTNAME);
-        assertThat(user.getLastName()).isEqualTo(DEFAULT_LASTNAME);
+        assertThat(user.getNome()).isEqualTo(DEFAULT_nome);
+        assertThat(user.getSobrenome()).isEqualTo(DEFAULT_sobrenome);
         assertThat(user.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(user.isActivated()).isTrue();
         assertThat(user.getImageUrl()).isEqualTo(DEFAULT_IMAGEURL);
@@ -501,8 +501,8 @@ class UserResourceIT {
 
         assertThat(userDTO.getId()).isEqualTo(DEFAULT_ID);
         assertThat(userDTO.getLogin()).isEqualTo(DEFAULT_LOGIN);
-        assertThat(userDTO.getFirstName()).isEqualTo(DEFAULT_FIRSTNAME);
-        assertThat(userDTO.getLastName()).isEqualTo(DEFAULT_LASTNAME);
+        assertThat(userDTO.getNome()).isEqualTo(DEFAULT_nome);
+        assertThat(userDTO.getSobrenome()).isEqualTo(DEFAULT_sobrenome);
         assertThat(userDTO.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(userDTO.isActivated()).isTrue();
         assertThat(userDTO.getImageUrl()).isEqualTo(DEFAULT_IMAGEURL);

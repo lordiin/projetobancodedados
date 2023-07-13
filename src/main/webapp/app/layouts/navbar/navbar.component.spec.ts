@@ -22,9 +22,9 @@ describe('Navbar Component', () => {
     activated: true,
     authorities: [],
     email: '',
-    firstName: 'John',
+    nome: 'John',
     langKey: '',
-    lastName: 'Doe',
+    sobrenome: 'Doe',
     login: 'john.doe',
     imageUrl: '',
   };

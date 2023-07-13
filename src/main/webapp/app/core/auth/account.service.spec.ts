@@ -17,9 +17,9 @@ function accountWithAuthorities(authorities: string[]): Account {
     activated: true,
     authorities,
     email: '',
-    firstName: '',
+    nome: '',
     langKey: '',
-    lastName: '',
+    sobrenome: '',
     login: '',
     imageUrl: '',
   };

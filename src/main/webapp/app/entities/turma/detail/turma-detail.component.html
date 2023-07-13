@@ -1,0 +1,68 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="turma">
+      <h2 data-cy="turmaDetailsHeading"><span>Turma</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ turma.id }}</span>
+        </dd>
+        <dt><span>Turma</span></dt>
+        <dd>
+          <span>{{ turma.turma }}</span>
+        </dd>
+        <dt><span>Periodo</span></dt>
+        <dd>
+          <span>{{ turma.periodo }}</span>
+        </dd>
+        <dt><span>Professor</span></dt>
+        <dd>
+          <span>{{ turma.professor }}</span>
+        </dd>
+        <dt><span>Horario</span></dt>
+        <dd>
+          <span>{{ turma.horario }}</span>
+        </dd>
+        <dt><span>Vagas Ocupadas</span></dt>
+        <dd>
+          <span>{{ turma.vagasOcupadas }}</span>
+        </dd>
+        <dt><span>Total Vagas</span></dt>
+        <dd>
+          <span>{{ turma.totalVagas }}</span>
+        </dd>
+        <dt><span>Local</span></dt>
+        <dd>
+          <span>{{ turma.local }}</span>
+        </dd>
+        <dt><span>Disciplina</span></dt>
+        <dd>
+          <div *ngIf="turma.disciplina">
+            <a [routerLink]="['/disciplina', turma.disciplina.id, 'view']">{{ turma.disciplina.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Departamento</span></dt>
+        <dd>
+          <div *ngIf="turma.departamento">
+            <a [routerLink]="['/departamento', turma.departamento.id, 'view']">{{ turma.departamento.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/turma', turma.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

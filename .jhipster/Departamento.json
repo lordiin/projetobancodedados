@@ -1,5 +1,6 @@
 {
   "applications": "*",
+  "changelogDate": "20230712060813",
   "entityTableName": "departamento",
   "fields": [
     {
@@ -13,5 +14,6 @@
   ],
   "name": "Departamento",
   "relationships": [],
+  "searchEngine": "no",
   "service": "serviceClass"
 }

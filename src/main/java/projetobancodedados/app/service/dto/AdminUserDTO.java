@@ -24,10 +24,10 @@ public class AdminUserDTO implements Serializable {
     private String login;
 
     @Size(max = 50)
-    private String firstName;
+    private String nome;
 
     @Size(max = 50)
-    private String lastName;
+    private String sobrenome;
 
     @Email
     @Size(min = 5, max = 254)
@@ -58,11 +58,10 @@ public class AdminUserDTO implements Serializable {
     public AdminUserDTO(User user) {
         this.id = user.getId();
         this.login = user.getLogin();
-        this.firstName = user.getFirstName();
-        this.lastName = user.getLastName();
+        this.nome = user.getNome();
+        this.sobrenome = user.getSobrenome();
         this.email = user.getEmail();
         this.activated = user.isActivated();
-        this.imageUrl = user.getImageUrl();
         this.langKey = user.getLangKey();
         this.createdBy = user.getCreatedBy();
         this.createdDate = user.getCreatedDate();
@@ -87,20 +86,20 @@ public class AdminUserDTO implements Serializable {
         this.login = login;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getNome() {
+        return nome;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getSobrenome() {
+        return sobrenome;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
     }
 
     public String getEmail() {
@@ -180,8 +179,8 @@ public class AdminUserDTO implements Serializable {
     public String toString() {
         return "AdminUserDTO{" +
             "login='" + login + '\'' +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
+            ", nome='" + nome + '\'' +
+            ", sobrenome='" + sobrenome + '\'' +
             ", email='" + email + '\'' +
             ", imageUrl='" + imageUrl + '\'' +
             ", activated=" + activated +

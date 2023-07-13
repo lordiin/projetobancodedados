@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="denuncia">
+      <h2 data-cy="denunciaDetailsHeading"><span>Denuncia</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ denuncia.id }}</span>
+        </dd>
+        <dt><span>Motivo</span></dt>
+        <dd>
+          <span>{{ denuncia.motivo }}</span>
+        </dd>
+        <dt><span>Avaliacao</span></dt>
+        <dd>
+          <div *ngIf="denuncia.avaliacao">
+            <a [routerLink]="['/avaliacao', denuncia.avaliacao.id, 'view']">{{ denuncia.avaliacao.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/denuncia', denuncia.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

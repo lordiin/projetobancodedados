@@ -17,11 +17,11 @@ export default class SettingsComponent implements OnInit {
   success = false;
 
   settingsForm = new FormGroup({
-    firstName: new FormControl(initialAccount.firstName, {
+    nome: new FormControl(initialAccount.nome, {
       nonNullable: true,
       validators: [Validators.required, Validators.minLength(1), Validators.maxLength(50)],
     }),
-    lastName: new FormControl(initialAccount.lastName, {
+    sobrenome: new FormControl(initialAccount.sobrenome, {
       nonNullable: true,
       validators: [Validators.required, Validators.minLength(1), Validators.maxLength(50)],
     }),
