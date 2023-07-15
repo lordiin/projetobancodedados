@@ -2,50 +2,50 @@
   <div class="d-flex justify-content-center">
     <div class="col-md-8">
       <h2 *ngIf="settingsForm.value.login">
-        User settings for [<strong>{{ settingsForm.value.login }}</strong
+        Configurações de usuário [<strong>{{ settingsForm.value.login }}</strong
         >]
       </h2>
 
       <div class="alert alert-success" *ngIf="success">
-        <strong>Settings saved!</strong>
+        <strong>Perfil alterado com sucesso!</strong>
       </div>
 
       <jhi-alert-error></jhi-alert-error>
 
       <form name="form" role="form" (ngSubmit)="save()" [formGroup]="settingsForm" *ngIf="settingsForm.value.login" novalidate>
         <div class="mb-3">
-          <label class="form-label" for="nome">First Name</label>
+          <label class="form-label" for="nome">Primeiro nome</label>
           <input
             type="text"
             class="form-control"
             id="nome"
             name="nome"
-            placeholder="Your first name"
+            placeholder="Seu primeiro nome..."
             formControlName="nome"
             data-cy="nome"
           />
 
           <div *ngIf="settingsForm.get('nome')!.invalid && (settingsForm.get('nome')!.dirty || settingsForm.get('nome')!.touched)">
-            <small class="form-text text-danger" *ngIf="settingsForm.get('nome')?.errors?.required"> Your first name is required. </small>
+            <small class="form-text text-danger" *ngIf="settingsForm.get('nome')?.errors?.required"> O primeiro nome é obrigatório </small>
 
             <small class="form-text text-danger" *ngIf="settingsForm.get('nome')?.errors?.minlength">
-              Your first name is required to be at least 1 character
+              Seu primeiro nome tem que ter ao menos 1 caractere
             </small>
 
             <small class="form-text text-danger" *ngIf="settingsForm.get('nome')?.errors?.maxlength">
-              Your first name cannot be longer than 50 characters
+              Seu primeiro nome não pode ter mais que 50 caracteres
             </small>
           </div>
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="sobrenome">Last Name</label>
+          <label class="form-label" for="sobrenome">Sobrenome</label>
           <input
             type="text"
             class="form-control"
             id="sobrenome"
             name="sobrenome"
-            placeholder="Your last name"
+            placeholder="Seu sobrenome..."
             formControlName="sobrenome"
             data-cy="sobrenome"
           />
@@ -55,48 +55,50 @@
               settingsForm.get('sobrenome')!.invalid && (settingsForm.get('sobrenome')!.dirty || settingsForm.get('sobrenome')!.touched)
             "
           >
-            <small class="form-text text-danger" *ngIf="settingsForm.get('sobrenome')?.errors?.required">
-              Your last name is required.
-            </small>
+            <small class="form-text text-danger" *ngIf="settingsForm.get('sobrenome')?.errors?.required"> O sobrenome é obrigatório </small>
 
             <small class="form-text text-danger" *ngIf="settingsForm.get('sobrenome')?.errors?.minlength">
-              Your last name is required to be at least 1 character
+              O sobrenome tem que ter ao menos 1 caractere
             </small>
 
             <small class="form-text text-danger" *ngIf="settingsForm.get('sobrenome')?.errors?.maxlength">
-              Your last name cannot be longer than 50 characters
+              O sobrenome não pode ter mais que 50 caracteres
             </small>
           </div>
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="email">Email</label>
+          <label class="form-label" for="email">E-mail</label>
           <input
             type="email"
             class="form-control"
             id="email"
             name="email"
-            placeholder="Your email"
+            placeholder="Seu email..."
             formControlName="email"
             data-cy="email"
           />
 
           <div *ngIf="settingsForm.get('email')!.invalid && (settingsForm.get('email')!.dirty || settingsForm.get('email')!.touched)">
-            <small class="form-text text-danger" *ngIf="settingsForm.get('email')?.errors?.required"> Your email is required. </small>
+            <small class="form-text text-danger" *ngIf="settingsForm.get('email')?.errors?.required"> O email é obrigatório. </small>
 
-            <small class="form-text text-danger" *ngIf="settingsForm.get('email')?.errors?.email"> Your email is invalid. </small>
+            <small class="form-text text-danger" *ngIf="settingsForm.get('email')?.errors?.email"> O email é inválido. </small>
 
             <small class="form-text text-danger" *ngIf="settingsForm.get('email')?.errors?.minlength">
-              Your email is required to be at least 5 characters.
+              O email tem que ter mais que 5 caracteres
             </small>
 
             <small class="form-text text-danger" *ngIf="settingsForm.get('email')?.errors?.maxlength">
-              Your email cannot be longer than 50 characters.
+              O email não pode ter mais que 50 caracteres
             </small>
           </div>
         </div>
 
-        <button type="submit" [disabled]="settingsForm.invalid" class="btn btn-primary" data-cy="submit">Save</button>
+        <div class="col-12 col-sm-4 p-4">
+          <jhi-show-image [inputName]="'imagem'" [imagem]="imagem" [editable]="true"></jhi-show-image>
+        </div>
+
+        <button type="submit" [disabled]="settingsForm.invalid" class="btn btn-primary" data-cy="submit">Salvar</button>
       </form>
     </div>
   </div>

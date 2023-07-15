@@ -48,6 +48,7 @@ export class DepartamentoUpdateComponent implements OnInit {
     if (departamento.id !== null) {
       this.subscribeToSaveResponse(this.departamentoService.update(departamento));
     } else {
+      // @ts-ignore
       this.subscribeToSaveResponse(this.departamentoService.create(departamento));
     }
   }

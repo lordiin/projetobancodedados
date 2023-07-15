@@ -4,17 +4,19 @@ import { FormGroup, FormControl, Validators, FormsModule, ReactiveFormsModule } 
 import SharedModule from 'app/shared/shared.module';
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
+import { Imagem } from '../../shared/imagens/imagem.model';
 
 const initialAccount: Account = {} as Account;
 
 @Component({
   selector: 'jhi-settings',
   standalone: true,
-  imports: [SharedModule, FormsModule, ReactiveFormsModule],
+  imports: [SharedModule, FormsModule, ReactiveFormsModule, SharedModule, SharedModule, SharedModule],
   templateUrl: './settings.component.html',
 })
 export default class SettingsComponent implements OnInit {
   success = false;
+  imagem: Imagem = new Imagem();
 
   settingsForm = new FormGroup({
     nome: new FormControl(initialAccount.nome, {
@@ -33,8 +35,9 @@ export default class SettingsComponent implements OnInit {
 
     activated: new FormControl(initialAccount.activated, { nonNullable: true }),
     authorities: new FormControl(initialAccount.authorities, { nonNullable: true }),
-    imageUrl: new FormControl(initialAccount.imageUrl, { nonNullable: true }),
     login: new FormControl(initialAccount.login, { nonNullable: true }),
+    imagem: new FormControl(initialAccount.imagem, { nonNullable: true }),
+    imagemContentType: new FormControl(initialAccount.imagemContentType, { nonNullable: true }),
   });
 
   constructor(private accountService: AccountService) {}
@@ -43,6 +46,9 @@ export default class SettingsComponent implements OnInit {
     this.accountService.identity().subscribe(account => {
       if (account) {
         this.settingsForm.patchValue(account);
+        this.imagem.arquivo = account.imagem;
+        this.imagem.contentType = account.imagemContentType;
+        console.log(this.imagem);
       }
     });
   }
@@ -51,6 +57,8 @@ export default class SettingsComponent implements OnInit {
     this.success = false;
 
     const account = this.settingsForm.getRawValue();
+    account.imagem = this.imagem.arquivo;
+    account.imagemContentType = this.imagem.contentType;
     this.accountService.save(account).subscribe(() => {
       this.success = true;
 

@@ -5,7 +5,7 @@
     <div class="d-flex justify-content-end">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span>Refresh list</span>
+        <span>Atualizar Lista</span>
       </button>
 
       <button
@@ -15,7 +15,7 @@
         [routerLink]="['/turma/new']"
       >
         <fa-icon icon="plus"></fa-icon>
-        <span> Create a new Turma </span>
+        <span>Criar uma nova turma</span>
       </button>
     </div>
   </h2>
@@ -25,71 +25,61 @@
   <jhi-alert></jhi-alert>
 
   <div class="alert alert-warning" id="no-result" *ngIf="turmas?.length === 0">
-    <span>No Turmas found</span>
+    <span>Nenhum turma encontrada!</span>
   </div>
 
   <div class="table-responsive table-entities" id="entities" *ngIf="turmas && turmas.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
-          <th scope="col" jhiSortBy="id">
+          <th scope="col">
             <div class="d-flex">
               <span>ID</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="turma">
+          <th scope="col">
             <div class="d-flex">
               <span>Turma</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="periodo">
+          <th scope="col">
             <div class="d-flex">
-              <span>Periodo</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
+              <span>Período</span>
             </div>
           </th>
-          <th scope="col" jhiSortBy="professor">
+          <th scope="col">
             <div class="d-flex">
               <span>Professor</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="horario">
+          <th scope="col">
             <div class="d-flex">
-              <span>Horario</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
+              <span>Horário</span>
             </div>
           </th>
-          <th scope="col" jhiSortBy="vagasOcupadas">
+          <th scope="col">
             <div class="d-flex">
               <span>Vagas Ocupadas</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="totalVagas">
+          <th scope="col">
             <div class="d-flex">
               <span>Total Vagas</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="local">
+          <th scope="col">
             <div class="d-flex">
               <span>Local</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="disciplina.id">
+          <th scope="col">
             <div class="d-flex">
               <span>Disciplina</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="departamento.id">
+          <th scope="col">
             <div class="d-flex">
               <span>Departamento</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
           <th scope="col"></th>
@@ -121,17 +111,23 @@
             <div class="btn-group">
               <button type="submit" [routerLink]="['/turma', turma.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
                 <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline">View</span>
+                <span class="d-none d-md-inline">Visualizar</span>
               </button>
 
               <button type="submit" [routerLink]="['/turma', turma.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
                 <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline">Edit</span>
+                <span class="d-none d-md-inline">Editar</span>
               </button>
 
-              <button type="submit" (click)="delete(turma)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button
+                *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                type="submit"
+                (click)="delete(turma)"
+                class="btn btn-danger btn-sm"
+                data-cy="entityDeleteButton"
+              >
                 <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline">Delete</span>
+                <span class="d-none d-md-inline">Deletar</span>
               </button>
             </div>
           </td>

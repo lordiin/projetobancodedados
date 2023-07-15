@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="p-0 d-flex justify-content-center align-items-center" [class.col-12]="!buttonRight" [class.col-9]="buttonRight">
+    <div class="img-container">
+      <img
+        *ngIf="!imagem || (!imagem.arquivo && editable)"
+        class="standard-document"
+        src="../../../content/images/standard-document.png"
+        alt=""
+        [style.width]="width"
+        [style.height]="height"
+      />
+      <div *ngIf="imagem && imagem.arquivo && isPdf(imagem.contentType)">
+        <fa-icon icon="cloud"></fa-icon>
+      </div>
+      <img
+        *ngIf="imagem && imagem.arquivo && !isPdf(imagem.contentType)"
+        [src]="imagem?.imageToShow"
+        class="show-img"
+        [style.height]="'auto'"
+      />
+    </div>
+  </div>
+
+  <div class="p-0 d-flex justify-content-center align-items-center" [class.col-12]="!buttonRight" [class.col-3]="buttonRight">
+    <label
+      *ngIf="editable"
+      class="btn btn-primary text-white m-0 btn-block"
+      id="fileUpload"
+      [for]="getInputId()"
+      type="button"
+      placement="top"
+      tooltip="Editar"
+    >
+      <fa-icon icon="cloud"></fa-icon>
+      <span>Upload da Imagem</span>
+      <input
+        class="form-control d-none"
+        [name]="inputName"
+        type="file"
+        [id]="getInputId()"
+        (change)="editFile($event)"
+        #inputFile
+        required
+        accept="image/x-png,image/gif,image/jpeg"
+      />
+    </label>
+    <button
+      *ngIf="imagem && editable && imagem.arquivo"
+      class="btn btn-danger text-white m-0 btn-block"
+      type="button"
+      (click)="clearFile()"
+      placement="top"
+    >
+      <fa-icon icon="ban"></fa-icon>
+      <span>Remover</span>
+    </button>
+  </div>
+</div>

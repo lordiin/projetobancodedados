@@ -13,7 +13,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.transaction.annotation.Transactional;
 import projetobancodedados.app.IntegrationTest;
-import projetobancodedados.app.domain.User;
 import projetobancodedados.app.repository.UserRepository;
 
 /**

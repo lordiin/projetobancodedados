@@ -9,7 +9,6 @@ import java.util.Set;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import projetobancodedados.app.domain.User;
 import projetobancodedados.app.service.dto.AdminUserDTO;
 import projetobancodedados.app.service.dto.UserDTO;
 

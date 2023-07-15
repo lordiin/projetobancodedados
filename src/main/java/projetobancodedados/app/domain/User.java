@@ -9,11 +9,9 @@ import jakarta.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.BatchSize;
 import projetobancodedados.app.config.Constants;
 
@@ -40,9 +38,11 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
     @Column(length = 50, unique = true, nullable = false)
     private String login;
 
-    @Lob
     @Column(name = "imagem")
     private byte[] imagem;
+
+    @Column(name = "imagem_content_type")
+    private String imagemContentType;
 
     @JsonIgnore
     @NotNull

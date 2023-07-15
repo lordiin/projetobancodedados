@@ -29,7 +29,6 @@ import org.springframework.mail.MailSendException;
 import org.springframework.mail.javamail.JavaMailSender;
 import projetobancodedados.app.IntegrationTest;
 import projetobancodedados.app.config.Constants;
-import projetobancodedados.app.domain.User;
 import tech.jhipster.config.JHipsterProperties;
 
 /**

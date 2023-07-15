@@ -58,6 +58,7 @@ export class DisciplinaUpdateComponent implements OnInit {
     if (disciplina.id !== null) {
       this.subscribeToSaveResponse(this.disciplinaService.update(disciplina));
     } else {
+      // @ts-ignore
       this.subscribeToSaveResponse(this.disciplinaService.create(disciplina));
     }
   }

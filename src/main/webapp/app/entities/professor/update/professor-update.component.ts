@@ -58,6 +58,7 @@ export class ProfessorUpdateComponent implements OnInit {
     if (professor.id !== null) {
       this.subscribeToSaveResponse(this.professorService.update(professor));
     } else {
+      // @ts-ignore
       this.subscribeToSaveResponse(this.professorService.create(professor));
     }
   }

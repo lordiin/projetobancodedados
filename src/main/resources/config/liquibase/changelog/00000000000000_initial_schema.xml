@@ -23,6 +23,7 @@
                 <constraints unique="true" nullable="false" uniqueConstraintName="ux_user_login"/>
             </column>
             <column name="imagem" type="bytea"/>
+            <column name="imagem_content_type" type="varchar(50)"/>
             <column name="password_hash" type="varchar(60)"/>
             <column name="nome" type="varchar(50)"/>
             <column name="sobrenome" type="varchar(50)"/>

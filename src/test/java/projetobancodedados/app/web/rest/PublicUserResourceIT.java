@@ -15,7 +15,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import projetobancodedados.app.IntegrationTest;
-import projetobancodedados.app.domain.User;
 import projetobancodedados.app.repository.UserRepository;
 import projetobancodedados.app.security.AuthoritiesConstants;
 

@@ -57,6 +57,7 @@ export class AvaliacaoUpdateComponent implements OnInit {
     if (avaliacao.id !== null) {
       this.subscribeToSaveResponse(this.avaliacaoService.update(avaliacao));
     } else {
+      // @ts-ignore
       this.subscribeToSaveResponse(this.avaliacaoService.create(avaliacao));
     }
   }

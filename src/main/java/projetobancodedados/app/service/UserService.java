@@ -216,13 +216,15 @@ public class UserService {
      * @param email     email id of user.
      * @param langKey   language key.
      */
-    public void updateUser(String nome, String sobrenome, String email, String langKey) {
+    public void updateUser(String nome, String sobrenome, String email, String langKey, byte[] imagem, String imagemContentType) {
         SecurityUtils
             .getCurrentUserLogin()
             .flatMap(userRepository::findOneByLogin)
             .ifPresent(user -> {
                 user.setNome(nome);
                 user.setSobrenome(sobrenome);
+                user.setImagem(imagem);
+                user.setImagemContentType(imagemContentType);
                 if (email != null) {
                     user.setEmail(email.toLowerCase());
                 }
@@ -266,21 +268,6 @@ public class UserService {
     @Transactional(readOnly = true)
     public Optional<User> getUserWithAuthorities() {
         return SecurityUtils.getCurrentUserLogin().flatMap(userRepository::findOneWithAuthoritiesByLogin);
-    }
-
-    /**
-     * Not activated users should be automatically deleted after 3 days.
-     * <p>
-     * This is scheduled to get fired everyday, at 01:00 (am).
-     */
-    @Scheduled(cron = "0 0 1 * * ?")
-    public void removeNotActivatedUsers() {
-        userRepository
-            .findAllByActivatedIsFalseAndActivationKeyIsNotNullAndCreatedDateBefore(Instant.now().minus(3, ChronoUnit.DAYS))
-            .forEach(user -> {
-                log.debug("Deleting not activated user {}", user.getLogin());
-                userRepository.delete(user);
-            });
     }
 
     /**

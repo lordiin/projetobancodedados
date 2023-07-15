@@ -85,7 +85,6 @@ class UserResourceIT {
         user.setEmail(RandomStringUtils.randomAlphabetic(5) + DEFAULT_EMAIL);
         user.setNome(DEFAULT_nome);
         user.setSobrenome(DEFAULT_sobrenome);
-        user.setImageUrl(DEFAULT_IMAGEURL);
         user.setLangKey(DEFAULT_LANGKEY);
         return user;
     }
@@ -118,7 +117,6 @@ class UserResourceIT {
         user.setSobrenome(DEFAULT_sobrenome);
         user.setEmail(DEFAULT_EMAIL);
         user.setActivated(true);
-        user.setImageUrl(DEFAULT_IMAGEURL);
         user.setLangKey(DEFAULT_LANGKEY);
         user.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
 
@@ -134,7 +132,6 @@ class UserResourceIT {
             assertThat(testUser.getNome()).isEqualTo(DEFAULT_nome);
             assertThat(testUser.getSobrenome()).isEqualTo(DEFAULT_sobrenome);
             assertThat(testUser.getEmail()).isEqualTo(DEFAULT_EMAIL);
-            assertThat(testUser.getImageUrl()).isEqualTo(DEFAULT_IMAGEURL);
             assertThat(testUser.getLangKey()).isEqualTo(DEFAULT_LANGKEY);
         });
     }
@@ -151,7 +148,6 @@ class UserResourceIT {
         user.setSobrenome(DEFAULT_sobrenome);
         user.setEmail(DEFAULT_EMAIL);
         user.setActivated(true);
-        user.setImageUrl(DEFAULT_IMAGEURL);
         user.setLangKey(DEFAULT_LANGKEY);
         user.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
 
@@ -177,7 +173,6 @@ class UserResourceIT {
         user.setSobrenome(DEFAULT_sobrenome);
         user.setEmail("anothermail@localhost");
         user.setActivated(true);
-        user.setImageUrl(DEFAULT_IMAGEURL);
         user.setLangKey(DEFAULT_LANGKEY);
         user.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
 
@@ -203,7 +198,6 @@ class UserResourceIT {
         user.setSobrenome(DEFAULT_sobrenome);
         user.setEmail(DEFAULT_EMAIL); // this email should already be used
         user.setActivated(true);
-        user.setImageUrl(DEFAULT_IMAGEURL);
         user.setLangKey(DEFAULT_LANGKEY);
         user.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
 
@@ -277,7 +271,6 @@ class UserResourceIT {
         user.setSobrenome(UPDATED_sobrenome);
         user.setEmail(UPDATED_EMAIL);
         user.setActivated(updatedUser.isActivated());
-        user.setImageUrl(UPDATED_IMAGEURL);
         user.setLangKey(UPDATED_LANGKEY);
         user.setCreatedBy(updatedUser.getCreatedBy());
         user.setCreatedDate(updatedUser.getCreatedDate());
@@ -296,7 +289,6 @@ class UserResourceIT {
             assertThat(testUser.getNome()).isEqualTo(UPDATED_nome);
             assertThat(testUser.getSobrenome()).isEqualTo(UPDATED_sobrenome);
             assertThat(testUser.getEmail()).isEqualTo(UPDATED_EMAIL);
-            assertThat(testUser.getImageUrl()).isEqualTo(UPDATED_IMAGEURL);
             assertThat(testUser.getLangKey()).isEqualTo(UPDATED_LANGKEY);
         });
     }
@@ -318,7 +310,6 @@ class UserResourceIT {
         user.setSobrenome(UPDATED_sobrenome);
         user.setEmail(UPDATED_EMAIL);
         user.setActivated(updatedUser.isActivated());
-        user.setImageUrl(UPDATED_IMAGEURL);
         user.setLangKey(UPDATED_LANGKEY);
         user.setCreatedBy(updatedUser.getCreatedBy());
         user.setCreatedDate(updatedUser.getCreatedDate());
@@ -338,7 +329,6 @@ class UserResourceIT {
             assertThat(testUser.getNome()).isEqualTo(UPDATED_nome);
             assertThat(testUser.getSobrenome()).isEqualTo(UPDATED_sobrenome);
             assertThat(testUser.getEmail()).isEqualTo(UPDATED_EMAIL);
-            assertThat(testUser.getImageUrl()).isEqualTo(UPDATED_IMAGEURL);
             assertThat(testUser.getLangKey()).isEqualTo(UPDATED_LANGKEY);
         });
     }
@@ -356,7 +346,6 @@ class UserResourceIT {
         anotherUser.setEmail("jhipster@localhost");
         anotherUser.setNome("java");
         anotherUser.setSobrenome("hipster");
-        anotherUser.setImageUrl("");
         anotherUser.setLangKey("en");
         userRepository.saveAndFlush(anotherUser);
 
@@ -370,7 +359,6 @@ class UserResourceIT {
         user.setSobrenome(updatedUser.getSobrenome());
         user.setEmail("jhipster@localhost"); // this email should already be used by anotherUser
         user.setActivated(updatedUser.isActivated());
-        user.setImageUrl(updatedUser.getImageUrl());
         user.setLangKey(updatedUser.getLangKey());
         user.setCreatedBy(updatedUser.getCreatedBy());
         user.setCreatedDate(updatedUser.getCreatedDate());
@@ -396,7 +384,6 @@ class UserResourceIT {
         anotherUser.setEmail("jhipster@localhost");
         anotherUser.setNome("java");
         anotherUser.setSobrenome("hipster");
-        anotherUser.setImageUrl("");
         anotherUser.setLangKey("en");
         userRepository.saveAndFlush(anotherUser);
 
@@ -410,7 +397,6 @@ class UserResourceIT {
         user.setSobrenome(updatedUser.getSobrenome());
         user.setEmail(updatedUser.getEmail());
         user.setActivated(updatedUser.isActivated());
-        user.setImageUrl(updatedUser.getImageUrl());
         user.setLangKey(updatedUser.getLangKey());
         user.setCreatedBy(updatedUser.getCreatedBy());
         user.setCreatedDate(updatedUser.getCreatedDate());
@@ -462,7 +448,6 @@ class UserResourceIT {
         userDTO.setSobrenome(DEFAULT_sobrenome);
         userDTO.setEmail(DEFAULT_EMAIL);
         userDTO.setActivated(true);
-        userDTO.setImageUrl(DEFAULT_IMAGEURL);
         userDTO.setLangKey(DEFAULT_LANGKEY);
         userDTO.setCreatedBy(DEFAULT_LOGIN);
         userDTO.setLastModifiedBy(DEFAULT_LOGIN);
@@ -475,7 +460,6 @@ class UserResourceIT {
         assertThat(user.getSobrenome()).isEqualTo(DEFAULT_sobrenome);
         assertThat(user.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(user.isActivated()).isTrue();
-        assertThat(user.getImageUrl()).isEqualTo(DEFAULT_IMAGEURL);
         assertThat(user.getLangKey()).isEqualTo(DEFAULT_LANGKEY);
         assertThat(user.getCreatedBy()).isNull();
         assertThat(user.getCreatedDate()).isNotNull();
@@ -505,7 +489,6 @@ class UserResourceIT {
         assertThat(userDTO.getSobrenome()).isEqualTo(DEFAULT_sobrenome);
         assertThat(userDTO.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(userDTO.isActivated()).isTrue();
-        assertThat(userDTO.getImageUrl()).isEqualTo(DEFAULT_IMAGEURL);
         assertThat(userDTO.getLangKey()).isEqualTo(DEFAULT_LANGKEY);
         assertThat(userDTO.getCreatedBy()).isEqualTo(DEFAULT_LOGIN);
         assertThat(userDTO.getCreatedDate()).isEqualTo(user.getCreatedDate());

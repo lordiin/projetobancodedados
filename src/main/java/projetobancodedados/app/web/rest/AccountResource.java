@@ -1,6 +1,5 @@
 package projetobancodedados.app.web.rest;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import java.util.*;
 import org.apache.commons.lang3.StringUtils;
@@ -113,7 +112,14 @@ public class AccountResource {
         if (!user.isPresent()) {
             throw new AccountResourceException("User could not be found");
         }
-        userService.updateUser(userDTO.getNome(), userDTO.getSobrenome(), userDTO.getEmail(), userDTO.getLangKey());
+        userService.updateUser(
+            userDTO.getNome(),
+            userDTO.getSobrenome(),
+            userDTO.getEmail(),
+            userDTO.getLangKey(),
+            userDTO.getImagem(),
+            userDTO.getImagemContentType()
+        );
     }
 
     /**

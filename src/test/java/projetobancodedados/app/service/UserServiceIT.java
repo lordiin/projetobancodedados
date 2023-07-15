@@ -15,14 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.auditing.AuditingHandler;
 import org.springframework.data.auditing.DateTimeProvider;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 import projetobancodedados.app.IntegrationTest;
-import projetobancodedados.app.config.Constants;
-import projetobancodedados.app.domain.User;
 import projetobancodedados.app.repository.UserRepository;
-import projetobancodedados.app.service.dto.AdminUserDTO;
 import tech.jhipster.security.RandomUtil;
 
 /**

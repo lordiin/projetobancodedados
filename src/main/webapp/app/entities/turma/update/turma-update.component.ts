@@ -64,6 +64,7 @@ export class TurmaUpdateComponent implements OnInit {
     if (turma.id !== null) {
       this.subscribeToSaveResponse(this.turmaService.update(turma));
     } else {
+      // @ts-ignore
       this.subscribeToSaveResponse(this.turmaService.create(turma));
     }
   }

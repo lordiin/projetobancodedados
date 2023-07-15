@@ -1,0 +1,27 @@
+.buttons-container {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+label.btn {
+  -webkit-appearance: initial !important;
+  -moz-appearance: initial !important;
+  appearance: initial !important;
+  margin: 0 !important;
+}
+
+.standard-document {
+  width: auto !important;
+  height: 150px !important;
+}
+
+.show-img {
+  width: auto !important;
+  max-width: 100% !important;
+  height: auto !important;
+  max-height: 150px !important;
+}

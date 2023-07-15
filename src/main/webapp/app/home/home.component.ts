@@ -88,7 +88,7 @@ export default class HomeComponent implements OnInit, AfterViewInit {
         this.authenticationError = false;
         if (!this.router.getCurrentNavigation()) {
           // There were no routing during login (eg from navigationToStoredUrl)
-          this.router.navigate(['/avaliacao']);
+          this.router.navigate(['/turma']);
         }
       },
       error: () => (this.authenticationError = true),

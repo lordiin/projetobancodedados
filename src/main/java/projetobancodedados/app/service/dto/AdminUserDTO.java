@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Set;
 import java.util.stream.Collectors;
+import lombok.Getter;
+import lombok.Setter;
 import projetobancodedados.app.config.Constants;
 import projetobancodedados.app.domain.Authority;
 import projetobancodedados.app.domain.User;
@@ -12,6 +14,9 @@ import projetobancodedados.app.domain.User;
 /**
  * A DTO representing a user, with his authorities.
  */
+
+@Getter
+@Setter
 public class AdminUserDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -33,8 +38,9 @@ public class AdminUserDTO implements Serializable {
     @Size(min = 5, max = 254)
     private String email;
 
-    @Size(max = 256)
-    private String imageUrl;
+    private byte[] imagem;
+
+    private String imagemContentType;
 
     private boolean activated = false;
 
@@ -58,6 +64,8 @@ public class AdminUserDTO implements Serializable {
     public AdminUserDTO(User user) {
         this.id = user.getId();
         this.login = user.getLogin();
+        this.imagem = user.getImagem();
+        this.imagemContentType = user.getImagemContentType();
         this.nome = user.getNome();
         this.sobrenome = user.getSobrenome();
         this.email = user.getEmail();
@@ -70,110 +78,6 @@ public class AdminUserDTO implements Serializable {
         this.authorities = user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet());
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getSobrenome() {
-        return sobrenome;
-    }
-
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public boolean isActivated() {
-        return activated;
-    }
-
-    public void setActivated(boolean activated) {
-        this.activated = activated;
-    }
-
-    public String getLangKey() {
-        return langKey;
-    }
-
-    public void setLangKey(String langKey) {
-        this.langKey = langKey;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Instant getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Instant createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public String getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public Instant getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
-    public void setLastModifiedDate(Instant lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-    }
-
-    public Set<String> getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(Set<String> authorities) {
-        this.authorities = authorities;
-    }
-
     // prettier-ignore
     @Override
     public String toString() {
@@ -182,7 +86,6 @@ public class AdminUserDTO implements Serializable {
             ", nome='" + nome + '\'' +
             ", sobrenome='" + sobrenome + '\'' +
             ", email='" + email + '\'' +
-            ", imageUrl='" + imageUrl + '\'' +
             ", activated=" + activated +
             ", langKey='" + langKey + '\'' +
             ", createdBy=" + createdBy +

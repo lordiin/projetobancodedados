@@ -57,6 +57,7 @@ export class DenunciaUpdateComponent implements OnInit {
     if (denuncia.id !== null) {
       this.subscribeToSaveResponse(this.denunciaService.update(denuncia));
     } else {
+      // @ts-ignore
       this.subscribeToSaveResponse(this.denunciaService.create(denuncia));
     }
   }

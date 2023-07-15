@@ -14,6 +14,10 @@ public class UserDTO implements Serializable {
 
     private String login;
 
+    private byte[] imagem;
+
+    private String imagemContentType;
+
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }

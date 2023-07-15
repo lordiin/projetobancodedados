@@ -48,4 +48,9 @@ public class Avaliacao implements Serializable {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
+
+    @Override
+    public String toString() {
+        return "Avaliacao{" + "turma=" + turma + ", user=" + user + '}';
+    }
 }

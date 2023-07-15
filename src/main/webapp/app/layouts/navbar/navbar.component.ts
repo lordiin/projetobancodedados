@@ -17,7 +17,7 @@ import NavbarItem from './navbar-item.model';
   selector: 'jhi-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
-  imports: [RouterModule, SharedModule, HasAnyAuthorityDirective],
+  imports: [RouterModule, SharedModule, HasAnyAuthorityDirective, HasAnyAuthorityDirective, HasAnyAuthorityDirective],
 })
 export default class NavbarComponent implements OnInit {
   inProduction?: boolean;

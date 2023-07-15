@@ -79,6 +79,7 @@ public class AvaliacaoService {
     public Page<Avaliacao> findAll(Pageable pageable) {
         log.debug("Request to get all Avaliacaos");
         Page avaliacoes = avaliacaoRepository.findAll(pageable);
+        avaliacoes.getContent().forEach(avaliacao -> log.info(avaliacao.toString()));
         return avaliacoes;
     }
 
@@ -92,8 +93,7 @@ public class AvaliacaoService {
     public Avaliacao findOne(Long id) {
         log.debug("Request to get Avaliacao : {}", id);
         Avaliacao avaliacao = avaliacaoRepository.findOne(id);
-        avaliacao.getTurma();
-        avaliacao.getUser();
+        log.info(avaliacao.toString());
         return avaliacao;
     }
 
