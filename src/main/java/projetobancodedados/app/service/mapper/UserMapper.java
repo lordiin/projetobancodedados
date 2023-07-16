@@ -46,12 +46,13 @@ public class UserMapper {
         } else {
             User user = new User();
             user.setId(userDTO.getId());
-            user.setLogin(userDTO.getLogin());
+            user.setMatricula(userDTO.getMatricula());
             user.setNome(userDTO.getNome());
             user.setSobrenome(userDTO.getSobrenome());
             user.setEmail(userDTO.getEmail());
+            user.setImagem(userDTO.getImagem());
+            user.setImagemContentType(userDTO.getImagemContentType());
             user.setActivated(userDTO.isActivated());
-            user.setLangKey(userDTO.getLangKey());
             Set<Authority> authorities = this.authoritiesFromStrings(userDTO.getAuthorities());
             user.setAuthorities(authorities);
             return user;
@@ -113,24 +114,24 @@ public class UserMapper {
         return userSet;
     }
 
-    @Named("login")
+    @Named("matricula")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
-    @Mapping(target = "login", source = "login")
+    @Mapping(target = "matricula", source = "matricula")
     public UserDTO toDtoLogin(User user) {
         if (user == null) {
             return null;
         }
         UserDTO userDto = new UserDTO();
         userDto.setId(user.getId());
-        userDto.setLogin(user.getLogin());
+        userDto.setMatricula(user.getMatricula());
         return userDto;
     }
 
     @Named("loginSet")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
-    @Mapping(target = "login", source = "login")
+    @Mapping(target = "matricula", source = "matricula")
     public Set<UserDTO> toDtoLoginSet(Set<User> users) {
         if (users == null) {
             return Collections.emptySet();

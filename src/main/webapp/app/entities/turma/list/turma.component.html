@@ -2,13 +2,14 @@
   <h2 id="page-heading" data-cy="TurmaHeading">
     <span>Turmas</span>
 
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-end mt-4">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span>Atualizar Lista</span>
       </button>
 
       <button
+        *jhiHasAnyAuthority="'ROLE_ADMIN'"
         id="jh-create-entity"
         data-cy="entityCreateButton"
         class="btn btn-primary jh-create-entity create-turma"
@@ -17,6 +18,22 @@
         <fa-icon icon="plus"></fa-icon>
         <span>Criar uma nova turma</span>
       </button>
+    </div>
+    <div class="d-flex align-items-center">
+      <div class="form-group col-6 mr-4">
+        <label for="field_professor">Filtro por Professor</label>
+        <select class="form-control" id="field_professor" name="filtroProfessor" (change)="load()" [(ngModel)]="filtroProfessor">
+          <option selected [value]="''">Todos</option>
+          <option [ngValue]="professor.nome" *ngFor="let professor of professores">{{ professor.nome }}</option>
+        </select>
+      </div>
+      <div class="form-group col-6 mr-4">
+        <label for="field_disciplina">Filtro por Disciplina</label>
+        <select class="form-control" id="field_disciplina" name="filtroDisciplina" (change)="load()" [(ngModel)]="filtroDisciplina">
+          <option selected [value]="''">Todos</option>
+          <option [ngValue]="disciplina.nome" *ngFor="let disciplina of disciplinas">{{ disciplina.nome }}</option>
+        </select>
+      </div>
     </div>
   </h2>
 
@@ -32,11 +49,6 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
-          <th scope="col">
-            <div class="d-flex">
-              <span>ID</span>
-            </div>
-          </th>
           <th scope="col">
             <div class="d-flex">
               <span>Turma</span>
@@ -87,34 +99,41 @@
       </thead>
       <tbody>
         <tr *ngFor="let turma of turmas; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/turma', turma.id, 'view']">{{ turma.id }}</a>
-          </td>
           <td>{{ turma.turma }}</td>
           <td>{{ turma.periodo }}</td>
-          <td>{{ turma.professor }}</td>
+          <td>
+            <div *ngIf="turma.professor">
+              <a style="color: #3e8acc" [routerLink]="['/professor', turma.professor.id, 'view']">{{ turma.professor.nome }}</a>
+            </div>
+          </td>
           <td>{{ turma.horario }}</td>
           <td>{{ turma.vagasOcupadas }}</td>
           <td>{{ turma.totalVagas }}</td>
           <td>{{ turma.local }}</td>
           <td>
             <div *ngIf="turma.disciplina">
-              <a [routerLink]="['/disciplina', turma.disciplina.id, 'view']">{{ turma.disciplina.id }}</a>
+              <a style="color: #3e8acc" [routerLink]="['/disciplina', turma.disciplina.id, 'view']">{{ turma.disciplina.nome }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="turma.departamento">
-              <a [routerLink]="['/departamento', turma.departamento.id, 'view']">{{ turma.departamento.id }}</a>
+              <a style="color: #3e8acc" [routerLink]="['/departamento', turma.departamento.id, 'view']">{{ turma.departamento.nome }}</a>
             </div>
           </td>
           <td class="text-end">
             <div class="btn-group">
               <button type="submit" [routerLink]="['/turma', turma.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
                 <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline">Visualizar</span>
+                <span class="d-none d-md-inline">Visualizar Turma</span>
               </button>
 
-              <button type="submit" [routerLink]="['/turma', turma.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+              <button
+                *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                type="submit"
+                [routerLink]="['/turma', turma.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
                 <fa-icon icon="pencil-alt"></fa-icon>
                 <span class="d-none d-md-inline">Editar</span>
               </button>

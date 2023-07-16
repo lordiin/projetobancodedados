@@ -15,6 +15,10 @@ import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/co
 import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/config/navigation.constants';
 import { EntityArrayResponseType, TurmaService } from '../service/turma.service';
 import { TurmaDeleteDialogComponent } from '../delete/turma-delete-dialog.component';
+import { IProfessor } from '../../professor/professor.model';
+import { IDisciplina } from '../../disciplina/disciplina.model';
+import { ProfessorService } from '../../professor/service/professor.service';
+import { DisciplinaService } from '../../disciplina/service/disciplina.service';
 
 @Component({
   standalone: true,
@@ -42,9 +46,15 @@ export class TurmaComponent implements OnInit {
   itemsPerPage = ITEMS_PER_PAGE;
   totalItems = 0;
   page = 1;
+  filtroProfessor: string = '';
+  filtroDisciplina: string = '';
+  professores: IProfessor[];
+  disciplinas: IDisciplina[];
 
   constructor(
     protected turmaService: TurmaService,
+    protected professorService: ProfessorService,
+    protected disciplinaService: DisciplinaService,
     protected activatedRoute: ActivatedRoute,
     public router: Router,
     protected modalService: NgbModal
@@ -54,6 +64,20 @@ export class TurmaComponent implements OnInit {
 
   ngOnInit(): void {
     this.load();
+    this.loadProfessores();
+    this.loadDisciplinas();
+  }
+
+  loadProfessores() {
+    this.professorService.query().subscribe(res => {
+      this.professores = res.body;
+    });
+  }
+
+  loadDisciplinas() {
+    this.disciplinaService.query().subscribe(res => {
+      this.disciplinas = res.body;
+    });
   }
 
   delete(turma: ITurma): void {
@@ -125,6 +149,12 @@ export class TurmaComponent implements OnInit {
       size: this.itemsPerPage,
       sort: this.getSortQueryParam(predicate, ascending),
     };
+    if (this.filtroProfessor) {
+      queryObject['filtroProfessor'] = this.filtroProfessor;
+    }
+    if (this.filtroDisciplina) {
+      queryObject['filtroDisciplina'] = this.filtroDisciplina;
+    }
     return this.turmaService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
   }
 

@@ -23,7 +23,7 @@ import projetobancodedados.app.config.Constants;
 @Setter
 @Entity
 @Table(name = "jhi_user")
-public class User extends AbstractAuditingEntity<Long> implements Serializable {
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -36,7 +36,7 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
     @Pattern(regexp = Constants.LOGIN_REGEX)
     @Size(min = 1, max = 50)
     @Column(length = 50, unique = true, nullable = false)
-    private String login;
+    private String matricula;
 
     @Column(name = "imagem")
     private byte[] imagem;
@@ -66,23 +66,6 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
     @NotNull
     @Column(nullable = false)
     private boolean activated = false;
-
-    @Size(min = 2, max = 10)
-    @Column(name = "lang_key", length = 10)
-    private String langKey;
-
-    @Size(max = 20)
-    @Column(name = "activation_key", length = 20)
-    @JsonIgnore
-    private String activationKey;
-
-    @Size(max = 20)
-    @Column(name = "reset_key", length = 20)
-    @JsonIgnore
-    private String resetKey;
-
-    @Column(name = "reset_date")
-    private Instant resetDate = null;
 
     @JsonIgnore
     @ManyToMany
@@ -115,13 +98,12 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
     @Override
     public String toString() {
         return "User{" +
-            "login='" + login + '\'' +
+            "matricula='" + matricula + '\'' +
             ", nome='" + nome + '\'' +
             ", sobrenome='" + sobrenome + '\'' +
             ", email='" + email + '\'' +
             ", activated='" + activated + '\'' +
-            ", langKey='" + langKey + '\'' +
-            ", activationKey='" + activationKey + '\'' +
+//            ", authorities='" + authorities + '\'' +
             "}";
     }
 }

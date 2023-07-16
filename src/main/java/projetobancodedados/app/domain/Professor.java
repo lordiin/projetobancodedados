@@ -22,9 +22,6 @@ public class Professor implements Serializable {
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "email")
-    private String email;
-
     @ManyToOne(fetch = FetchType.LAZY)
     private Departamento departamento;
 
@@ -54,19 +51,6 @@ public class Professor implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public Professor email(String email) {
-        this.setEmail(email);
-        return this;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public Departamento getDepartamento() {
@@ -107,7 +91,6 @@ public class Professor implements Serializable {
         return "Professor{" +
             "id=" + getId() +
             ", nome='" + getNome() + "'" +
-            ", email='" + getEmail() + "'" +
             "}";
     }
 }

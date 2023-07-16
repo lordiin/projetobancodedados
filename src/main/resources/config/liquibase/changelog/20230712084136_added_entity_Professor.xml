@@ -17,9 +17,6 @@
             <column name="nome" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="email" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="departamento_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -39,7 +36,7 @@
     -->
     <changeSet id="20230712084136-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/fake-data/professor.csv"
+                  file="config/liquibase/data/professor.csv"
                   separator=";"
                   tableName="professor"
                   usePreparedStatements="true">

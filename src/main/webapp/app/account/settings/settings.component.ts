@@ -31,11 +31,10 @@ export default class SettingsComponent implements OnInit {
       nonNullable: true,
       validators: [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email],
     }),
-    langKey: new FormControl(initialAccount.langKey, { nonNullable: true }),
 
     activated: new FormControl(initialAccount.activated, { nonNullable: true }),
     authorities: new FormControl(initialAccount.authorities, { nonNullable: true }),
-    login: new FormControl(initialAccount.login, { nonNullable: true }),
+    matricula: new FormControl(initialAccount.matricula, { nonNullable: true }),
     imagem: new FormControl(initialAccount.imagem, { nonNullable: true }),
     imagemContentType: new FormControl(initialAccount.imagemContentType, { nonNullable: true }),
   });

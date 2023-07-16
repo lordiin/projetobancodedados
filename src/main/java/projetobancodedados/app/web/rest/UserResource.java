@@ -22,7 +22,6 @@ import projetobancodedados.app.config.Constants;
 import projetobancodedados.app.domain.User;
 import projetobancodedados.app.repository.UserRepository;
 import projetobancodedados.app.security.AuthoritiesConstants;
-import projetobancodedados.app.service.MailService;
 import projetobancodedados.app.service.UserService;
 import projetobancodedados.app.service.dto.AdminUserDTO;
 import projetobancodedados.app.web.rest.errors.BadRequestAlertException;
@@ -86,12 +85,9 @@ public class UserResource {
 
     private final UserRepository userRepository;
 
-    private final MailService mailService;
-
-    public UserResource(UserService userService, UserRepository userRepository, MailService mailService) {
+    public UserResource(UserService userService, UserRepository userRepository) {
         this.userService = userService;
         this.userRepository = userRepository;
-        this.mailService = mailService;
     }
 
     /**
@@ -114,17 +110,20 @@ public class UserResource {
         if (userDTO.getId() != null) {
             throw new BadRequestAlertException("A new user cannot already have an ID", "userManagement", "idexists");
             // Lowercase the user login before comparing with database
-        } else if (userRepository.findOneByLogin(userDTO.getLogin().toLowerCase()).isPresent()) {
+        } else if (userRepository.findOneByMatricula(userDTO.getMatricula().toLowerCase()).isPresent()) {
             throw new LoginAlreadyUsedException();
         } else if (userRepository.findOneByEmailIgnoreCase(userDTO.getEmail()).isPresent()) {
             throw new EmailAlreadyUsedException();
         } else {
             User newUser = userService.createUser(userDTO);
-            mailService.sendCreationEmail(newUser);
             return ResponseEntity
-                .created(new URI("/api/admin/users/" + newUser.getLogin()))
+                .created(new URI("/api/admin/users/" + newUser.getMatricula()))
                 .headers(
-                    HeaderUtil.createAlert(applicationName, "A user is created with identifier " + newUser.getLogin(), newUser.getLogin())
+                    HeaderUtil.createAlert(
+                        applicationName,
+                        "A user is created with identifier " + newUser.getMatricula(),
+                        newUser.getMatricula()
+                    )
                 )
                 .body(newUser);
         }
@@ -146,7 +145,7 @@ public class UserResource {
         if (existingUser.isPresent() && (!existingUser.get().getId().equals(userDTO.getId()))) {
             throw new EmailAlreadyUsedException();
         }
-        existingUser = userRepository.findOneByLogin(userDTO.getLogin().toLowerCase());
+        existingUser = userRepository.findOneByMatricula(userDTO.getMatricula().toLowerCase());
         if (existingUser.isPresent() && (!existingUser.get().getId().equals(userDTO.getId()))) {
             throw new LoginAlreadyUsedException();
         }
@@ -154,7 +153,7 @@ public class UserResource {
 
         return ResponseUtil.wrapOrNotFound(
             updatedUser,
-            HeaderUtil.createAlert(applicationName, "A user is updated with identifier " + userDTO.getLogin(), userDTO.getLogin())
+            HeaderUtil.createAlert(applicationName, "A user is updated with identifier " + userDTO.getMatricula(), userDTO.getMatricula())
         );
     }
 

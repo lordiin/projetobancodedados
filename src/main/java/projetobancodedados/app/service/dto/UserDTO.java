@@ -1,55 +1,32 @@
 package projetobancodedados.app.service.dto;
 
 import java.io.Serializable;
+import lombok.*;
 import projetobancodedados.app.domain.User;
 
 /**
  * A DTO representing a user, with only the public attributes.
  */
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
 public class UserDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
 
-    private String login;
+    private String matricula;
 
     private byte[] imagem;
 
     private String imagemContentType;
 
-    public UserDTO() {
-        // Empty constructor needed for Jackson.
-    }
-
     public UserDTO(User user) {
         this.id = user.getId();
-        // Customize it here if you need, or not, nome/sobrenome/etc
-        this.login = user.getLogin();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "UserDTO{" +
-            "id='" + id + '\'' +
-            ", login='" + login + '\'' +
-            "}";
+        this.matricula = user.getMatricula();
+        this.imagem = user.getImagem();
+        this.imagemContentType = user.getImagemContentType();
     }
 }

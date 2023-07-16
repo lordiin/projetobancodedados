@@ -139,9 +139,13 @@ public class TurmaResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of turmas in body.
      */
     @GetMapping("/turmas")
-    public ResponseEntity<List<Turma>> getAllTurmas(@org.springdoc.core.annotations.ParameterObject Pageable pageable) {
+    public ResponseEntity<List<Turma>> getAllTurmas(
+        @org.springdoc.core.annotations.ParameterObject Pageable pageable,
+        String filtroProfessor,
+        String filtroDisciplina
+    ) {
         log.debug("REST request to get a page of Turmas");
-        Page<Turma> page = turmaService.findAll(pageable);
+        Page<Turma> page = turmaService.findAll(pageable, filtroProfessor, filtroDisciplina);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

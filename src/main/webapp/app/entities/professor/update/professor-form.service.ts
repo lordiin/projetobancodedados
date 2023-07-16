@@ -19,7 +19,6 @@ type ProfessorFormDefaults = Pick<NewProfessor, 'id'>;
 type ProfessorFormGroupContent = {
   id: FormControl<IProfessor['id'] | NewProfessor['id']>;
   nome: FormControl<IProfessor['nome']>;
-  email: FormControl<IProfessor['email']>;
   departamento: FormControl<IProfessor['departamento']>;
 };
 
@@ -41,7 +40,6 @@ export class ProfessorFormService {
         }
       ),
       nome: new FormControl(professorRawValue.nome),
-      email: new FormControl(professorRawValue.email),
       departamento: new FormControl(professorRawValue.departamento),
     });
   }

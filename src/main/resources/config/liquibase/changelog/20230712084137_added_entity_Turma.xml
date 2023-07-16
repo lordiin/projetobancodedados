@@ -20,9 +20,6 @@
             <column name="periodo" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="professor" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="horario" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -33,6 +30,9 @@
                 <constraints nullable="true" />
             </column>
             <column name="local" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="professor_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <column name="disciplina_id" type="bigint">
@@ -57,14 +57,13 @@
     -->
     <changeSet id="20230712084137-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/fake-data/turma.csv"
+                  file="config/liquibase/data/turmas_2023-1.csv"
                   separator=";"
                   tableName="turma"
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="turma" type="string"/>
             <column name="periodo" type="string"/>
-            <column name="professor" type="string"/>
             <column name="horario" type="string"/>
             <column name="vagas_ocupadas" type="string"/>
             <column name="total_vagas" type="string"/>

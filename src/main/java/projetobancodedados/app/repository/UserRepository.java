@@ -1,12 +1,11 @@
 package projetobancodedados.app.repository;
 
-import java.time.Instant;
-import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import projetobancodedados.app.domain.User;
 
@@ -15,14 +14,15 @@ import projetobancodedados.app.domain.User;
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findOneByActivationKey(String activationKey);
-    List<User> findAllByActivatedIsFalseAndActivationKeyIsNotNullAndCreatedDateBefore(Instant dateTime);
-    Optional<User> findOneByResetKey(String resetKey);
+    @Query(value = "select * from user", nativeQuery = true)
+    Page<User> findAll(Pageable pageable);
+
     Optional<User> findOneByEmailIgnoreCase(String email);
-    Optional<User> findOneByLogin(String login);
+
+    Optional<User> findOneByMatricula(String matricula);
 
     @EntityGraph(attributePaths = "authorities")
-    Optional<User> findOneWithAuthoritiesByLogin(String login);
+    Optional<User> findOneWithAuthoritiesByMatricula(String matricula);
 
     @EntityGraph(attributePaths = "authorities")
     Optional<User> findOneWithAuthoritiesByEmailIgnoreCase(String email);
@@ -30,9 +30,35 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Page<User> findAllByIdNotNullAndActivatedIsTrue(Pageable pageable);
 
     @Query(
-        value = "INSERT INTO user (login, imagem, imagemContentType, password, nome, sobrenome, email, activated, authorities) " +
-        "VALUES (:user.login, :user.imagem, :user.imagemContentType, :user.password, :user.nome, :user.sobrenome, :user.email, :user.activated, :user.authorities)",
+        value = "INSERT INTO jhi_user (matricula, imagem, imagem_content_type, password_hash, nome, sobrenome, email, activated, authorities) " +
+        "VALUES (:matricula, :imagem, :imagemContentType, :password, :nome, :sobrenome, :email, :activated)",
         nativeQuery = true
     )
-    User save(User user);
+    void save(
+        @Param("matricula") String matricula,
+        @Param("imagem") byte[] imagem,
+        @Param("imagemContentType") String imagemContentType,
+        @Param("password") String password,
+        @Param("nome") String nome,
+        @Param("sobrenome") String sobrenome,
+        @Param("email") String email,
+        @Param("activated") Boolean activated
+    );
+
+    @Query(
+        value = "UPDATE jhi_user set matricula = :matricula, imagem = :imagem, imagem_content_type = :imagemContentType, password_hash = :password," +
+        " nome = :nome, sobrenome = :sobrenome, email = :email, activated = :activated where id = :id",
+        nativeQuery = true
+    )
+    void save(
+        @Param("id") Long id,
+        @Param("matricula") String matricula,
+        @Param("imagem") byte[] imagem,
+        @Param("imagemContentType") String imagemContentType,
+        @Param("password") String password,
+        @Param("nome") String nome,
+        @Param("sobrenome") String sobrenome,
+        @Param("email") String email,
+        @Param("activated") Boolean activated
+    );
 }

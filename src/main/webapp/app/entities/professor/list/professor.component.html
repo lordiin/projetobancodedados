@@ -65,7 +65,6 @@
             <a [routerLink]="['/professor', professor.id, 'view']">{{ professor.id }}</a>
           </td>
           <td>{{ professor.nome }}</td>
-          <td>{{ professor.email }}</td>
           <td>
             <div *ngIf="professor.departamento">
               <a [routerLink]="['/departamento', professor.departamento.id, 'view']">{{ professor.departamento.id }}</a>

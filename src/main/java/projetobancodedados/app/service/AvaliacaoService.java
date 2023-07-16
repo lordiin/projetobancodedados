@@ -46,30 +46,6 @@ public class AvaliacaoService {
     }
 
     /**
-     * Partially update a avaliacao.
-     *
-     * @param avaliacao the entity to update partially.
-     * @return the persisted entity.
-     */
-    //    public Optional<Avaliacao> partialUpdate(Avaliacao avaliacao) {
-    //        log.debug("Request to partially update Avaliacao : {}", avaliacao);
-    //
-    //        return avaliacaoRepository
-    //            .findById(avaliacao.getId())
-    //            .map(existingAvaliacao -> {
-    //                if (avaliacao.getDescricao() != null) {
-    //                    existingAvaliacao.setDescricao(avaliacao.getDescricao());
-    //                }
-    //                if (avaliacao.getNota() != null) {
-    //                    existingAvaliacao.setNota(avaliacao.getNota());
-    //                }
-    //
-    //                return existingAvaliacao;
-    //            })
-    //            .map(avaliacaoRepository::save);
-    //    }
-
-    /**
      * Get all the avaliacaos.
      *
      * @param pageable the pagination information.

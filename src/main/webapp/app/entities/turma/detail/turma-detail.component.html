@@ -10,10 +10,6 @@
       <jhi-alert></jhi-alert>
 
       <dl class="row-md jh-entity-details">
-        <dt><span>ID</span></dt>
-        <dd>
-          <span>{{ turma.id }}</span>
-        </dd>
         <dt><span>Turma</span></dt>
         <dd>
           <span>{{ turma.turma }}</span>
@@ -24,7 +20,9 @@
         </dd>
         <dt><span>Professor</span></dt>
         <dd>
-          <span>{{ turma.professor }}</span>
+          <div *ngIf="turma.professor">
+            <a style="color: #3e8acc" [routerLink]="['/professor', turma.professor.id, 'view']">{{ turma.professor.nome }}</a>
+          </div>
         </dd>
         <dt><span>Horário</span></dt>
         <dd>
@@ -45,13 +43,13 @@
         <dt><span>Disciplina</span></dt>
         <dd>
           <div *ngIf="turma.disciplina">
-            <a [routerLink]="['/disciplina', turma.disciplina.id, 'view']">{{ turma.disciplina.id }}</a>
+            <a style="color: #3e8acc" [routerLink]="['/disciplina', turma.disciplina.id, 'view']">{{ turma.disciplina.nome }}</a>
           </div>
         </dd>
         <dt><span>Departamento</span></dt>
         <dd>
           <div *ngIf="turma.departamento">
-            <a [routerLink]="['/departamento', turma.departamento.id, 'view']">{{ turma.departamento.id }}</a>
+            <a style="color: #3e8acc" [routerLink]="['/departamento', turma.departamento.id, 'view']">{{ turma.departamento.nome }}</a>
           </div>
         </dd>
       </dl>

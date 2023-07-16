@@ -1,9 +1,20 @@
 package projetobancodedados.app.service;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
+import java.math.BigInteger;
+import java.util.List;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import org.aspectj.weaver.ast.Instanceof;
+import org.hibernate.type.StandardBasicTypes;
+import org.hibernate.type.descriptor.java.IntegerJavaType;
+import org.hibernate.type.descriptor.java.StringJavaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,17 +24,16 @@ import projetobancodedados.app.repository.TurmaRepository;
 /**
  * Service Implementation for managing {@link Turma}.
  */
+@RequiredArgsConstructor
 @Service
 @Transactional
 public class TurmaService {
 
     private final Logger log = LoggerFactory.getLogger(TurmaService.class);
-
     private final TurmaRepository turmaRepository;
 
-    public TurmaService(TurmaRepository turmaRepository) {
-        this.turmaRepository = turmaRepository;
-    }
+    @PersistenceContext
+    private EntityManager entityManager;
 
     /**
      * Save a turma.
@@ -93,9 +103,81 @@ public class TurmaService {
      * @return the list of entities.
      */
     @Transactional(readOnly = true)
-    public Page<Turma> findAll(Pageable pageable) {
-        log.debug("Request to get all Turmas");
-        return turmaRepository.findAll(pageable);
+    public Page<Turma> findAll(Pageable pageable, String filtroProfessor, String filtroDisciplina) {
+        String nativeQuery;
+        if (filtroProfessor != null && filtroDisciplina != null) {
+            nativeQuery =
+                "SELECT t.id AS id, t.turma AS turma, t.periodo AS periodo, " +
+                "t.horario AS horario, t.vagas_ocupadas AS vagas_ocupadas, t.total_vagas AS total_vagas, " +
+                "t.local AS local, p.id AS professor_id, p.nome AS p_nome, d.id AS disciplina_id, d.nome AS d_nome, " +
+                "dep.id AS departamento_id, dep.nome AS dep_nome " +
+                "FROM turma t " +
+                "JOIN professor p ON t.professor_id = p.id " +
+                "JOIN disciplina d ON t.disciplina_id = d.id " +
+                "JOIN departamento dep ON t.departamento_id = dep.id " +
+                "WHERE (p.nome = :filtroProfessor) AND " +
+                "(d.nome = :filtroDisciplina) " +
+                "LIMIT :pageSize OFFSET :offset";
+        } else if (filtroProfessor != null && filtroDisciplina == null) {
+            nativeQuery =
+                "SELECT t.id AS id, t.turma AS turma, t.periodo AS periodo, " +
+                "t.horario AS horario, t.vagas_ocupadas AS vagas_ocupadas, t.total_vagas AS total_vagas, " +
+                "t.local AS local, p.id AS professor_id, p.nome AS p_nome, d.id AS disciplina_id, d.nome AS d_nome, " +
+                "dep.id AS departamento_id, dep.nome AS dep_nome " +
+                "FROM turma t " +
+                "JOIN professor p ON t.professor_id = p.id " +
+                "JOIN disciplina d ON t.disciplina_id = d.id " +
+                "JOIN departamento dep ON t.departamento_id = dep.id " +
+                "WHERE (p.nome = :filtroProfessor) " +
+                "LIMIT :pageSize OFFSET :offset";
+        } else if (filtroProfessor == null && filtroDisciplina != null) {
+            nativeQuery =
+                "SELECT t.id AS id, t.turma AS turma, t.periodo AS periodo, " +
+                "t.horario AS horario, t.vagas_ocupadas AS vagas_ocupadas, t.total_vagas AS total_vagas, " +
+                "t.local AS local, p.id AS professor_id, p.nome AS p_nome, d.id AS disciplina_id, d.nome AS d_nome, " +
+                "dep.id AS departamento_id, dep.nome AS dep_nome " +
+                "FROM turma t " +
+                "JOIN professor p ON t.professor_id = p.id " +
+                "JOIN disciplina d ON t.disciplina_id = d.id " +
+                "JOIN departamento dep ON t.departamento_id = dep.id " +
+                "WHERE (d.nome = :filtroDisciplina) " +
+                "LIMIT :pageSize OFFSET :offset";
+        } else {
+            nativeQuery =
+                "SELECT t.id AS id, t.turma AS turma, t.periodo AS periodo, " +
+                "t.horario AS horario, t.vagas_ocupadas AS vagas_ocupadas, t.total_vagas AS total_vagas, " +
+                "t.local AS local, p.id AS professor_id, p.nome AS p_nome, d.id AS disciplina_id, d.nome AS d_nome, " +
+                "dep.id AS departamento_id, dep.nome AS dep_nome " +
+                "FROM turma t " +
+                "JOIN professor p ON t.professor_id = p.id " +
+                "JOIN disciplina d ON t.disciplina_id = d.id " +
+                "JOIN departamento dep ON t.departamento_id = dep.id " +
+                "LIMIT :pageSize OFFSET :offset";
+        }
+        Query query = entityManager.createNativeQuery(nativeQuery, Turma.class);
+        if (filtroProfessor != null) {
+            query.setParameter("filtroProfessor", filtroProfessor);
+        }
+        if (filtroDisciplina != null) {
+            query.setParameter("filtroDisciplina", filtroDisciplina);
+        }
+        query.setParameter("pageSize", pageable.getPageSize());
+        query.setParameter("offset", pageable.getOffset());
+
+        List<Turma> resultList = query.getResultList();
+
+        String countQuery =
+            "SELECT COUNT(*) " +
+            "FROM turma t " +
+            "JOIN professor p ON t.professor_id = p.id " +
+            "JOIN disciplina d ON t.disciplina_id = d.id " +
+            "JOIN departamento dep ON t.departamento_id = dep.id";
+
+        Query outraQuery = entityManager.createNativeQuery(countQuery);
+        long totalCount = (Long) outraQuery.getSingleResult();
+        Page turmas = new PageImpl<>(resultList, pageable, totalCount);
+        turmas.getContent().forEach(turma -> log.info(turma.toString()));
+        return turmas;
     }
 
     /**
@@ -106,8 +188,22 @@ public class TurmaService {
      */
     @Transactional(readOnly = true)
     public Optional<Turma> findOne(Long id) {
-        log.debug("Request to get Turma : {}", id);
-        return turmaRepository.findById(id);
+        String nativeQuery =
+            "SELECT t.id AS id, t.turma AS turma, t.periodo AS periodo, " +
+            "t.horario AS horario, t.vagas_ocupadas AS vagas_ocupadas, t.total_vagas AS total_vagas, " +
+            "t.local AS local, p.id AS professor_id, p.nome AS p_nome, d.id AS disciplina_id, d.nome AS d_nome, " +
+            "dep.id AS departamento_id, dep.nome AS dep_nome " +
+            "FROM turma t " +
+            "JOIN professor p ON t.professor_id = p.id " +
+            "JOIN disciplina d ON t.disciplina_id = d.id " +
+            "JOIN departamento dep ON t.departamento_id = dep.id " +
+            "WHERE t.id = ?1";
+        Query query = entityManager.createNativeQuery(nativeQuery, Turma.class);
+        query.setParameter(1, id);
+        List<Turma> resultList = query.getResultList();
+        log.info(resultList.stream().findFirst().toString());
+
+        return resultList.stream().findFirst();
     }
 
     /**

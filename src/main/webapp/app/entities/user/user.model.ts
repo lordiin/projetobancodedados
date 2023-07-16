@@ -1,10 +1,10 @@
 export interface IUser {
   id: number;
-  login?: string;
+  matricula?: string;
 }
 
 export class User implements IUser {
-  constructor(public id: number, public login: string) {}
+  constructor(public id: number, public matricula: string) {}
 }
 
 export function getUserIdentifier(user: IUser): number {

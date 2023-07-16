@@ -62,9 +62,6 @@ public class ProfessorService {
                 if (professor.getNome() != null) {
                     existingProfessor.setNome(professor.getNome());
                 }
-                if (professor.getEmail() != null) {
-                    existingProfessor.setEmail(professor.getEmail());
-                }
 
                 return existingProfessor;
             })
