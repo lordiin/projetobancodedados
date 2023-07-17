@@ -70,7 +70,7 @@
             <column name="local" type="string"/>
         </loadData>
         <loadData
-            file="config/liquibase/fake-data/avaliacao.csv"
+            file="config/liquibase/data/avaliacao.csv"
             separator=";"
             tableName="avaliacao"
             usePreparedStatements="true">
@@ -79,7 +79,7 @@
             <column name="nota" type="numeric"/>
         </loadData>
         <loadData
-            file="config/liquibase/fake-data/denuncia.csv"
+            file="config/liquibase/data/denuncia.csv"
             separator=";"
             tableName="denuncia"
             usePreparedStatements="true">

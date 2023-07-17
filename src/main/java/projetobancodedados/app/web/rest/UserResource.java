@@ -183,14 +183,14 @@ public class UserResource {
     /**
      * {@code GET /admin/users/:login} : get the "login" user.
      *
-     * @param login the login of the user to find.
+     * @param matricula the login of the user to find.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the "login" user, or with status {@code 404 (Not Found)}.
      */
-    @GetMapping("/users/{login}")
+    @GetMapping("/users/{matricula}")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
-    public ResponseEntity<AdminUserDTO> getUser(@PathVariable @Pattern(regexp = Constants.LOGIN_REGEX) String login) {
-        log.debug("REST request to get User : {}", login);
-        return ResponseUtil.wrapOrNotFound(userService.getUserWithAuthoritiesByLogin(login).map(AdminUserDTO::new));
+    public ResponseEntity<AdminUserDTO> getUser(@PathVariable @Pattern(regexp = Constants.LOGIN_REGEX) String matricula) {
+        log.debug("REST request to get User : {}", matricula);
+        return ResponseUtil.wrapOrNotFound(userService.getUserWithAuthoritiesByLogin(matricula).map(AdminUserDTO::new));
     }
 
     /**

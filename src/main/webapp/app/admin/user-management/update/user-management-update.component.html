@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="myUserLabel">Create or edit a user</h2>
+      <h2 id="myUserLabel">Criar ou editar um usuário</h2>
 
       <jhi-alert-error></jhi-alert-error>
 
@@ -11,40 +11,38 @@
       </div>
 
       <div class="mb-3">
-        <label class="form-label">Login</label>
-        <input type="text" class="form-control" name="login" formControlName="login" />
+        <label class="form-label">Matrícula</label>
+        <input type="text" class="form-control" name="matricula" formControlName="matricula" />
 
-        <div *ngIf="editForm.get('login')!.invalid && (editForm.get('login')!.dirty || editForm.get('login')!.touched)">
-          <small class="form-text text-danger" *ngIf="editForm.get('login')?.errors?.required"> This field is required. </small>
+        <div *ngIf="editForm.get('matricula')!.invalid && (editForm.get('matricula')!.dirty || editForm.get('matricula')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('matricula')?.errors?.required"> O campo é obrigatório </small>
 
-          <small class="form-text text-danger" *ngIf="editForm.get('login')?.errors?.maxlength">
-            This field cannot be longer than 50 characters.
+          <small class="form-text text-danger" *ngIf="editForm.get('matricula')?.errors?.maxlength">
+            Este campo não pode ter mais que 50 caracteres
           </small>
 
-          <small class="form-text text-danger" *ngIf="editForm.get('login')?.errors?.pattern">
-            This field can only contain letters, digits and e-mail addresses.
-          </small>
+          <small class="form-text text-danger" *ngIf="editForm.get('matricula')?.errors?.pattern"> Erro </small>
         </div>
       </div>
 
       <div class="mb-3">
-        <label class="form-label">First name</label>
+        <label class="form-label">Nome</label>
         <input type="text" class="form-control" name="nome" formControlName="nome" />
 
         <div *ngIf="editForm.get('nome')!.invalid && (editForm.get('nome')!.dirty || editForm.get('nome')!.touched)">
           <small class="form-text text-danger" *ngIf="editForm.get('nome')?.errors?.maxlength">
-            This field cannot be longer than 50 characters.
+            Este campo não pode ter mais que 50 caracteres
           </small>
         </div>
       </div>
 
       <div class="mb-3">
-        <label>Last name</label>
+        <label>Sobrenome</label>
         <input type="text" class="form-control" name="sobrenome" formControlName="sobrenome" />
 
         <div *ngIf="editForm.get('sobrenome')!.invalid && (editForm.get('sobrenome')!.dirty || editForm.get('sobrenome')!.touched)">
           <small class="form-text text-danger" *ngIf="editForm.get('sobrenome')?.errors?.maxlength">
-            This field cannot be longer than 50 characters.
+            Este campo não pode ter mais que 50 caracteres
           </small>
         </div>
       </div>
@@ -54,7 +52,7 @@
         <input type="email" class="form-control" name="email" formControlName="email" />
 
         <div *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
-          <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.required"> This field is required. </small>
+          <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.required"> O campo é obrigatório </small>
 
           <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.maxlength">
             This field cannot be longer than 100 characters.
@@ -64,7 +62,7 @@
             This field is required to be at least 5 characters.
           </small>
 
-          <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.email"> Your email is invalid. </small>
+          <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.email"> O email é inválido. </small>
         </div>
       </div>
 
@@ -78,22 +76,22 @@
             name="activated"
             formControlName="activated"
           />
-          <span>Activated</span>
+          <span>Ativado</span>
         </label>
       </div>
 
       <div class="mb-3">
-        <label>Profiles</label>
+        <label>Authorities</label>
         <select class="form-control" multiple name="authority" formControlName="authorities">
           <option *ngFor="let authority of authorities" [value]="authority">{{ authority }}</option>
         </select>
       </div>
       <button type="button" class="btn btn-secondary" (click)="previousState()">
-        <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancelar</span>
       </button>
 
       <button type="submit" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-        <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        <fa-icon icon="save"></fa-icon>&nbsp;<span>Salvar</span>
       </button>
     </form>
   </div>

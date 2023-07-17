@@ -14,7 +14,6 @@ import projetobancodedados.app.domain.User;
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    @Query(value = "select * from user", nativeQuery = true)
     Page<User> findAll(Pageable pageable);
 
     Optional<User> findOneByEmailIgnoreCase(String email);

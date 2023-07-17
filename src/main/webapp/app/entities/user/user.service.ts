@@ -22,24 +22,4 @@ export class UserService {
   compareUser(o1: Pick<IUser, 'id'> | null, o2: Pick<IUser, 'id'> | null): boolean {
     return o1 && o2 ? o1.id === o2.id : o1 === o2;
   }
-
-  addUserToCollectionIfMissing<Type extends Partial<IUser> & Pick<IUser, 'id'>>(
-    userCollection: Type[],
-    ...usersToCheck: (Type | null | undefined)[]
-  ): IUser[] {
-    const users: Type[] = usersToCheck.filter(isPresent);
-    if (users.length > 0) {
-      const userCollectionIdentifiers = userCollection.map(userItem => getUserIdentifier(userItem)!);
-      const usersToAdd = users.filter(userItem => {
-        const userIdentifier = getUserIdentifier(userItem);
-        if (userCollectionIdentifiers.includes(userIdentifier)) {
-          return false;
-        }
-        userCollectionIdentifiers.push(userIdentifier);
-        return true;
-      });
-      return [...usersToAdd, ...userCollection];
-    }
-    return userCollection;
-  }
 }

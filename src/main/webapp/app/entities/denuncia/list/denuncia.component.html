@@ -53,7 +53,9 @@
           </td>
           <td>
             <div *ngIf="denuncia.avaliacao">
-              <a style="color: #3e8acc" [routerLink]="['/user', denuncia.avaliacao.user.id, 'view']">{{ denuncia.avaliacao.user.nome }}</a>
+              <a style="color: #3e8acc" [routerLink]="['/admin', 'user-management', denuncia.avaliacao.user.matricula, 'view']">{{
+                denuncia.avaliacao.user.nome
+              }}</a>
             </div>
           </td>
           <td class="text-end">

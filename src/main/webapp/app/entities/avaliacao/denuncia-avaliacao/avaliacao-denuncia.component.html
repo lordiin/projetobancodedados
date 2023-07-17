@@ -1,14 +1,14 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()">
-      <h2 id="jhi-avaliacao-heading" data-cy="AvaliacaoCreateUpdateHeading">Criar uma Denúncia</h2>
+      <h2 id="jhi-avaliacao-heading" data-cy="AvaliacaoCreateUpdateHeading">Digite o motivo da denúncia</h2>
 
       <div>
         <jhi-alert-error></jhi-alert-error>
 
         <div class="mb-3">
-          <label class="form-label" for="field_descricao">Descrição</label>
-          <textarea [(ngModel)]="motivo" class="form-control" name="descricao" id="field_descricao" data-cy="descricao"></textarea>
+          <label class="form-label" for="field_motivo">Motivo</label>
+          <textarea [(ngModel)]="motivo" class="form-control" name="motivo" id="field_motivo" data-cy="motivo"></textarea>
         </div>
       </div>
 
