@@ -7,6 +7,7 @@ export class Account {
     public sobrenome: string | null,
     public matricula: string,
     public imagem: any,
-    public imagemContentType: string
+    public imagemContentType: string,
+    public id: number
   ) {}
 }

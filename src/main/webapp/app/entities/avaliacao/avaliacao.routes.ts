@@ -6,6 +6,8 @@ import { AvaliacaoDetailComponent } from './detail/avaliacao-detail.component';
 import { AvaliacaoUpdateComponent } from './update/avaliacao-update.component';
 import AvaliacaoResolve from './route/avaliacao-routing-resolve.service';
 import { ASC } from 'app/config/navigation.constants';
+import { AvaliacaoCreateComponent } from './create/avaliacao-create.component';
+import { AvaliacaoDenunciaComponent } from './denuncia-avaliacao/avaliacao-denuncia.component';
 
 const avaliacaoRoute: Routes = [
   {
@@ -35,6 +37,22 @@ const avaliacaoRoute: Routes = [
   {
     path: ':id/edit',
     component: AvaliacaoUpdateComponent,
+    resolve: {
+      avaliacao: AvaliacaoResolve,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'new/turma/:turmaId',
+    component: AvaliacaoCreateComponent,
+    resolve: {
+      avaliacao: AvaliacaoResolve,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: ':avaliacaoId/denuncia',
+    component: AvaliacaoDenunciaComponent,
     resolve: {
       avaliacao: AvaliacaoResolve,
     },

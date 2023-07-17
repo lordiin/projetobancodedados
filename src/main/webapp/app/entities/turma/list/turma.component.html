@@ -51,17 +51,22 @@
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
           <th scope="col">
             <div class="d-flex">
+              <span>Professor</span>
+            </div>
+          </th>
+          <th scope="col">
+            <div class="d-flex">
+              <span>Disciplina</span>
+            </div>
+          </th>
+          <th scope="col">
+            <div class="d-flex">
               <span>Turma</span>
             </div>
           </th>
           <th scope="col">
             <div class="d-flex">
               <span>Período</span>
-            </div>
-          </th>
-          <th scope="col">
-            <div class="d-flex">
-              <span>Professor</span>
             </div>
           </th>
           <th scope="col">
@@ -86,11 +91,6 @@
           </th>
           <th scope="col">
             <div class="d-flex">
-              <span>Disciplina</span>
-            </div>
-          </th>
-          <th scope="col">
-            <div class="d-flex">
               <span>Departamento</span>
             </div>
           </th>
@@ -99,22 +99,22 @@
       </thead>
       <tbody>
         <tr *ngFor="let turma of turmas; trackBy: trackId" data-cy="entityTable">
-          <td>{{ turma.turma }}</td>
-          <td>{{ turma.periodo }}</td>
           <td>
             <div *ngIf="turma.professor">
               <a style="color: #3e8acc" [routerLink]="['/professor', turma.professor.id, 'view']">{{ turma.professor.nome }}</a>
             </div>
           </td>
-          <td>{{ turma.horario }}</td>
-          <td>{{ turma.vagasOcupadas }}</td>
-          <td>{{ turma.totalVagas }}</td>
-          <td>{{ turma.local }}</td>
           <td>
             <div *ngIf="turma.disciplina">
               <a style="color: #3e8acc" [routerLink]="['/disciplina', turma.disciplina.id, 'view']">{{ turma.disciplina.nome }}</a>
             </div>
           </td>
+          <td>{{ turma.turma }}</td>
+          <td>{{ turma.periodo }}</td>
+          <td>{{ turma.horario }}</td>
+          <td>{{ turma.vagasOcupadas }}</td>
+          <td>{{ turma.totalVagas }}</td>
+          <td>{{ turma.local }}</td>
           <td>
             <div *ngIf="turma.departamento">
               <a style="color: #3e8acc" [routerLink]="['/departamento', turma.departamento.id, 'view']">{{ turma.departamento.nome }}</a>
@@ -122,9 +122,9 @@
           </td>
           <td class="text-end">
             <div class="btn-group">
-              <button type="submit" [routerLink]="['/turma', turma.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+              <button type="submit" [routerLink]="['/turma', turma.id, 'avaliacoes']" class="btn btn-info btn-sm">
                 <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline">Visualizar Turma</span>
+                <span class="d-none d-md-inline">Visualizar Avaliações</span>
               </button>
 
               <button

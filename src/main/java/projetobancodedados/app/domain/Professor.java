@@ -22,7 +22,8 @@ public class Professor implements Serializable {
     @Column(name = "nome")
     private String nome;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "departamento_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.EAGER)
     private Departamento departamento;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

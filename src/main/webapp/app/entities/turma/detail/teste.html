@@ -1,0 +1,149 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div *ngIf="empresa" class="card">
+        <div class="row" style="margin: 20px">
+          <h2 data-cy="empresaDetailsHeading">
+            <span>Empresa</span>
+            <button type="button" [routerLink]="['/empresa', empresa.id, 'edit']" class="float-right btn btn-primary">
+              <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Editar dados</span>
+            </button>
+          </h2>
+        </div>
+
+        <hr />
+
+        <!--      <jhi-alert-error></jhi-alert-error>-->
+
+        <!--      <jhi-alert></jhi-alert>-->
+
+        <dl class="row-md jh-entity-details" style="margin: 20px; margin-top: 10px">
+          <dt><span>Nome</span></dt>
+          <dd>
+            <span>{{ empresa.nome }}</span>
+          </dd>
+          <dt><span>CNPJ</span></dt>
+          <dd>
+            <span>{{ empresa.cnpj | CNPJCPF }}</span>
+          </dd>
+          <dt><span>Endereço</span></dt>
+          <dd>
+            <span>{{ empresa.endereco }}</span>
+          </dd>
+          <dt><span>CEP</span></dt>
+          <dd>
+            <span>{{ empresa.cep | mask: '00000-000' }}</span>
+          </dd>
+          <dt><span>Nome Contato</span></dt>
+          <dd>
+            <span>{{ empresa.nomeContato }}</span>
+          </dd>
+          <dt><span>Telefone</span></dt>
+          <dd>
+            <span>{{ empresa.telefone | mask: '(00) 0000-0000' }}</span>
+          </dd>
+          <dt><span>Celular</span></dt>
+          <dd>
+            <span>{{ empresa.celular | mask: '(00) 0 0000-0000' }}</span>
+          </dd>
+          <dt><span>E-mail</span></dt>
+          <dd>
+            <span>{{ empresa.email }}</span>
+          </dd>
+          <dt><span>Ativa</span></dt>
+          <dd>
+            <span>{{ empresa.ativa ? 'Sim' : 'Não' }}</span>
+          </dd>
+          <dt><span>Cidade</span></dt>
+          <dd>
+            <div *ngIf="empresa.cidade">{{ empresa.cidade.descricao }}</div>
+          </dd>
+          <dt><span>Estado</span></dt>
+          <dd>
+            <div *ngIf="empresa.estado">{{ empresa.estado.sigla }}</div>
+          </dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="card mt-4">
+    <div style="margin: 20px; background-color: white">
+      <ul class="nav nav-tabs text-nowrap" id="myTab" role="tablist">
+        <li class="nav-item">
+          <button
+            class="nav-link w-100 font-weight-bold"
+            [class.active]="aba === 'funcionarios'"
+            id="funcionarios-tab"
+            (click)="aba = 'funcionarios'"
+          >
+            <span class="d-none d-md-inline-block">Funcionários</span>
+            <i class="d-inline-block d-md-none fa fa-calculator"></i>
+          </button>
+        </li>
+        <li class="nav-item">
+          <button
+            class="nav-link w-100 font-weight-bold"
+            [class.active]="aba === 'departamentos'"
+            id="departamentos-tab"
+            (click)="aba = 'departamentos'"
+          >
+            <span class="d-none d-md-inline-block">Departamentos</span>
+            <i class="d-inline-block d-md-none fa fa-certificate"></i>
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link w-100 font-weight-bold" [class.active]="aba === 'servicos'" id="servicos-tab" (click)="aba = 'servicos'">
+            <span class="d-none d-md-inline-block">Serviços</span>
+            <i class="d-inline-block d-md-none fa fa-certificate"></i>
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link w-100 font-weight-bold" [class.active]="aba === 'pedidos'" id="pedidos-tab" (click)="aba = 'pedidos'">
+            <span class="d-none d-md-inline-block">Pedidos</span>
+            <i class="d-inline-block d-md-none fa fa-certificate"></i>
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link w-100 font-weight-bold" [class.active]="aba === 'clientes'" id="clientes-tab" (click)="aba = 'clientes'">
+            <span class="d-none d-md-inline-block">Clientes</span>
+            <i class="d-inline-block d-md-none fa fa-certificate"></i>
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link w-100 font-weight-bold" [class.active]="aba === 'socios'" id="socios-tab" (click)="aba = 'socios'">
+            <span class="d-none d-md-inline-block">Sócios</span>
+            <i class="d-inline-block d-md-none fa fa-certificate"></i>
+          </button>
+        </li>
+      </ul>
+      <div class="tab-content p-2 pt-4 nav-title-divider" *ngIf="empresa">
+        <div *ngIf="aba === 'funcionarios'" id="funcionarios" class="tab-pane fade active show">
+          <div class="row">
+            <div class="col-12">
+              <jhi-lista-funcionarios [empresaId]="empresa.id"></jhi-lista-funcionarios>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="aba === 'departamentos'" id="departamentos" class="tab-pane fade active show">
+          <jhi-lista-departamentos *ngIf="empresa" [empresaId]="empresa.id"></jhi-lista-departamentos>
+        </div>
+        <div *ngIf="aba === 'servicos'" id="servicos" class="tab-pane fade active show">
+          <jhi-lista-servicos *ngIf="empresa" [empresaId]="empresa.id"></jhi-lista-servicos>
+        </div>
+        <div *ngIf="aba === 'pedidos'" id="pedidos" class="tab-pane fade active show">
+          <jhi-lista-pedidos *ngIf="empresa" [empresaId]="empresa.id"></jhi-lista-pedidos>
+        </div>
+        <div *ngIf="aba === 'clientes'" id="clientes" class="tab-pane fade active show">
+          <jhi-lista-clientes *ngIf="empresa" [empresaId]="empresa.id"></jhi-lista-clientes>
+        </div>
+        <div *ngIf="aba === 'socios'" id="socios" class="tab-pane fade active show">
+          <jhi-lista-socios *ngIf="empresa" [empresaId]="empresa.id"></jhi-lista-socios>
+        </div>
+      </div>
+      <button type="submit" (click)="previousState()" class="btn btn-info mt-5" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Voltar</span>
+      </button>
+    </div>
+    <div class="d-flex justify-content-center"></div>
+  </div>
+</div>

@@ -9,6 +9,7 @@ import { AvaliacaoService } from '../service/avaliacao.service';
 
 export const avaliacaoResolve = (route: ActivatedRouteSnapshot): Observable<null | IAvaliacao> => {
   const id = route.params['id'];
+  const turmaId = route.params['turmaId'];
   if (id) {
     return inject(AvaliacaoService)
       .find(id)
@@ -22,6 +23,8 @@ export const avaliacaoResolve = (route: ActivatedRouteSnapshot): Observable<null
           }
         })
       );
+  }
+  if (turmaId) {
   }
   return of(null);
 };

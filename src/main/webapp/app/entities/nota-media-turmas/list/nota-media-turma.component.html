@@ -1,0 +1,55 @@
+<div>
+  <h2 id="page-heading" data-cy="AvaliacaoHeading">
+    <span>Nota Média das Turmas</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Atualizar Lista</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="notaMediaTurmas?.length === 0">
+    <span>Nenhuma avaliação foi realizada</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="notaMediaTurmas && notaMediaTurmas.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col">
+            <div class="d-flex">
+              <span>Nome da Disciplina</span>
+              <fa-icon class="p-1"></fa-icon>
+            </div>
+          </th>
+          <th scope="col">
+            <div class="d-flex">
+              <span>Nome do Professor</span>
+              <fa-icon class="p-1"></fa-icon>
+            </div>
+          </th>
+          <th scope="col">
+            <div class="d-flex">
+              <span>Nota Média</span>
+              <fa-icon class="p-1"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let notaMediaTurma of notaMediaTurmas" data-cy="entityTable">
+          <td>{{ notaMediaTurma.nomeDisciplina }}</td>
+          <td>{{ notaMediaTurma.nomeProfessor }}</td>
+          <td>{{ notaMediaTurma.notaMedia }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

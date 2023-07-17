@@ -22,6 +22,10 @@ export class DenunciaService {
     return this.http.post<IDenuncia>(this.resourceUrl, denuncia, { observe: 'response' });
   }
 
+  createDenuncia(denuncia: NewDenuncia, avaliacaoId: number): Observable<EntityResponseType> {
+    return this.http.post<IDenuncia>(`${this.resourceUrl}/avaliacao/${avaliacaoId}`, denuncia, { observe: 'response' });
+  }
+
   update(denuncia: IDenuncia): Observable<EntityResponseType> {
     return this.http.put<IDenuncia>(`${this.resourceUrl}/${this.getDenunciaIdentifier(denuncia)}`, denuncia, { observe: 'response' });
   }

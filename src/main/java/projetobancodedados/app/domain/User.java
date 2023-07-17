@@ -22,7 +22,7 @@ import projetobancodedados.app.config.Constants;
 @Getter
 @Setter
 @Entity
-@Table(name = "jhi_user")
+@Table(name = "usuario")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -70,7 +70,7 @@ public class User implements Serializable {
     @JsonIgnore
     @ManyToMany
     @JoinTable(
-        name = "jhi_user_authority",
+        name = "usuario_authority",
         joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") },
         inverseJoinColumns = { @JoinColumn(name = "authority_name", referencedColumnName = "name") }
     )

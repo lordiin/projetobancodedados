@@ -21,17 +21,19 @@
         <dt><span>Departamento</span></dt>
         <dd>
           <div *ngIf="professor.departamento">
-            <a [routerLink]="['/departamento', professor.departamento.id, 'view']">{{ professor.departamento.id }}</a>
+            <a style="color: #3e8acc" [routerLink]="['/departamento', professor.departamento.id, 'view']">{{
+              professor.departamento.nome
+            }}</a>
           </div>
         </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Voltar</span>
       </button>
 
-      <button type="button" [routerLink]="['/professor', professor.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="button" [routerLink]="['/professor', professor.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Editar</span>
       </button>
     </div>
   </div>

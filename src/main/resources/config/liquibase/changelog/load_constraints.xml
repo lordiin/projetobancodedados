@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Turma.
+    -->
+    <changeSet id="20230712084137-2" author="Levi">
+
+        <sql>
+-- add primary key constraint to usuario_authority
+            ALTER TABLE usuario_authority ADD CONSTRAINT PK_usuario_authority PRIMARY KEY (user_id, authority_name);
+-- add foreign key constraint fk_authority_name to usuario_authority
+            ALTER TABLE usuario_authority ADD CONSTRAINT fk_authority_name FOREIGN KEY (authority_name) REFERENCES jhi_authority(name);
+-- add foreign key constraint fk_user_id to usuario_authority
+            ALTER TABLE usuario_authority ADD CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES usuario(id);
+-- add not null constraint to password_hash column in usuario table
+            ALTER TABLE usuario ALTER COLUMN password_hash SET NOT NULL;
+-- add foreign key constraint fk_avaliacao__turma_id to avaliacao
+            ALTER TABLE avaliacao ADD CONSTRAINT fk_avaliacao_turma_id FOREIGN KEY (turma_id) REFERENCES turma(id);
+-- add foreign key constraint fk_avaliacao__user_id to avaliacao
+            ALTER TABLE avaliacao ADD CONSTRAINT fk_avaliacao_user_id FOREIGN KEY (user_id) REFERENCES usuario(id);
+-- add foreign key constraint fk_denuncia__avaliacao_id to denuncia
+            ALTER TABLE denuncia ADD CONSTRAINT fk_denuncia__avaliacao_id FOREIGN KEY (avaliacao_id) REFERENCES avaliacao(id);
+-- add foreign key constraint fk_disciplina__departamento_id to disciplina
+            ALTER TABLE disciplina ADD CONSTRAINT fk_disciplina__departamento_id FOREIGN KEY (departamento_id) REFERENCES departamento(id);
+-- add foreign key constraint fk_professor__departamento_id to professor
+            ALTER TABLE professor ADD CONSTRAINT fk_professor__departamento_id FOREIGN KEY (departamento_id) REFERENCES departamento(id);
+-- add foreign key constraint fk_turma__disciplina_id to turma
+            ALTER TABLE turma ADD CONSTRAINT fk_turma__disciplina_id FOREIGN KEY (disciplina_id) REFERENCES disciplina(id);
+-- add foreign key constraint fk_turma__departamento_id to turma
+            ALTER TABLE turma ADD CONSTRAINT fk_turma__departamento_id FOREIGN KEY (departamento_id) REFERENCES departamento(id);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

@@ -34,6 +34,16 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'Turmas' },
         loadChildren: () => import('./turma/turma.routes'),
       },
+      {
+        path: 'media',
+        data: { pageTitle: 'Média' },
+        loadChildren: () => import('./nota-media-turmas/nota-media-turma.routes'),
+      },
+      {
+        path: 'avaliacoes',
+        data: { pageTitle: 'Avaliações' },
+        loadChildren: () => import('./view-avaliacoes/view-avaliacoes.routes'),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

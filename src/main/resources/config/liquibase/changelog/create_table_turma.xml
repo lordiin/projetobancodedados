@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity Turma.
+    -->
+    <changeSet id="20230712084137-1" author="Levi">
+        <sql>
+-- create table turma
+            CREATE TABLE turma (
+                                   id SERIAL PRIMARY KEY NOT NULL,
+                                   turma VARCHAR(255),
+                                   periodo VARCHAR(255),
+                                   horario VARCHAR(255),
+                                   vagas_ocupadas VARCHAR(255),
+                                   total_vagas VARCHAR(255),
+                                   local VARCHAR(255),
+                                   professor_id BIGINT,
+                                   disciplina_id BIGINT,
+                                   departamento_id BIGINT
+            );
+        </sql>
+    </changeSet>
+</databaseChangeLog>

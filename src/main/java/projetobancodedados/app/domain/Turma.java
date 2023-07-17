@@ -43,17 +43,17 @@ public class Turma implements Serializable {
     private String local;
 
     @JoinColumn(name = "professor_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties(value = { "departamento" }, allowSetters = true)
     private Professor professor;
 
     @JoinColumn(name = "disciplina_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties(value = { "departamento" }, allowSetters = true)
     private Disciplina disciplina;
 
     @JoinColumn(name = "departamento_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Departamento departamento;
 
     @Override

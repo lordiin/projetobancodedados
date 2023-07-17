@@ -100,4 +100,10 @@ public class DenunciaService {
         log.debug("Request to delete Denuncia : {}", id);
         denunciaRepository.deleteById(id);
     }
+
+    public Denuncia saveDenuncia(Denuncia denuncia, Long avaliacaoId) {
+        log.debug("Request to save Denuncia : {}", denuncia);
+        denunciaRepository.saveDenuncia(denuncia.getMotivo(), avaliacaoId);
+        return denuncia;
+    }
 }

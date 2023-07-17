@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity Departamento.
+    -->
+    <changeSet id="20230712084134-1" author="Levi">
+        <sql>
+-- create table departamento
+            CREATE TABLE departamento (
+                                          id SERIAL PRIMARY KEY NOT NULL,
+                                          codigo VARCHAR(255),
+                                          nome VARCHAR(255)
+            );
+
+        </sql>
+    </changeSet>
+</databaseChangeLog>

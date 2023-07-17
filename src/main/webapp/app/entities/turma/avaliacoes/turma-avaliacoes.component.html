@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div *ngIf="turma" class="card">
+        <div class="row" style="margin: 20px">
+          <h2 class="text-center">
+            <span>Avaliações </span>
+          </h2>
+        </div>
+        <div class="row justify-content-between text-center">
+          <div class="col-6">
+            <h5>Professor:</h5>
+            <span>{{ turma.professor.nome }}</span>
+          </div>
+          <div class="col-6">
+            <h5>Disciplina:</h5>
+            <span>{{ turma.disciplina.nome }}</span>
+          </div>
+        </div>
+        <hr />
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+        <div class="col-4">
+          <button type="button" class="btn btn-info float-right" (click)="navigateCriarAvaliacao()">
+            <fa-icon icon="plus"></fa-icon>
+            Criar uma avaliação para esta turma
+          </button>
+        </div>
+        <div *ngFor="let avaliacao of avaliacoes">
+          <div class="card mt-4">
+            <div class="card-body">
+              <h5 class="card-title">
+                <span class="font-weight-bold">Avaliação feita por {{ avaliacao.user.nome }} {{ avaliacao.user?.sobrenome }}</span>
+                <button
+                  class="btn btn-danger float-right"
+                  *ngIf="currentAccount.id !== avaliacao.user.id"
+                  (click)="navigateDenunciarAvaliacao(avaliacao.id)"
+                >
+                  <fa-icon icon="lock"></fa-icon>
+                  Denunciar
+                </button>
+                <button
+                  class="btn btn-danger float-right"
+                  *ngIf="currentAccount.id === avaliacao.user.id"
+                  (click)="deletarAvaliacao(avaliacao.id)"
+                >
+                  <fa-icon icon="cancel"></fa-icon>
+
+                  Deletar sua avaliação
+                </button>
+              </h5>
+              <div class="d-flex align-items-center">
+                <div class="mr-2 d-flex">
+                  <p class="card-text mb-0">Nota:</p>
+                  <div class="rating">
+                    <fa-icon [icon]="faStar" *ngFor="let _ of [].constructor(avaliacao.nota || 0)"></fa-icon>
+                  </div>
+                </div>
+              </div>
+
+              <hr />
+              <div>
+                <p class="card-text mb-0">Descrição:</p>
+                <p class="card-text">{{ avaliacao.descricao }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex">
+          <button type="submit" (click)="previousState()" class="btn btn-info mt-4" data-cy="entityDetailsBackButton">
+            <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Voltar</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

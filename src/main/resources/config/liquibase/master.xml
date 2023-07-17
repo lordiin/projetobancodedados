@@ -10,19 +10,16 @@
     <property name="uuidType" value="uuid" dbms="postgresql"/>
     <property name="datetimeType" value="datetime" dbms="postgresql"/>
 
-    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20230712084132_added_entity_Avaliacao.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20230712084133_added_entity_Denuncia.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20230712084134_added_entity_Departamento.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20230712084135_added_entity_Disciplina.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20230712084136_added_entity_Professor.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20230712084137_added_entity_Turma.xml" relativeToChangelogFile="false"/>
-    <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
-    <include file="config/liquibase/changelog/20230712084132_added_entity_constraints_Avaliacao.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20230712084133_added_entity_constraints_Denuncia.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20230712084135_added_entity_constraints_Disciplina.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20230712084136_added_entity_constraints_Professor.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20230712084137_added_entity_constraints_Turma.xml" relativeToChangelogFile="false"/>
-    <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
-    <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
+
+    <include file="/config/liquibase/changelog/create_tables_usuario_authority.xml" relativeToChangelogFile="false"/>
+    <include file="/config/liquibase/changelog/create_table_avaliacao.xml" relativeToChangelogFile="false"/>
+    <include file="/config/liquibase/changelog/create_table_denuncia.xml" relativeToChangelogFile="false"/>
+    <include file="/config/liquibase/changelog/create_table_departamento.xml" relativeToChangelogFile="false"/>
+    <include file="/config/liquibase/changelog/create_table_disciplina.xml" relativeToChangelogFile="false"/>
+    <include file="/config/liquibase/changelog/create_table_professor.xml" relativeToChangelogFile="false"/>
+    <include file="/config/liquibase/changelog/create_table_turma.xml" relativeToChangelogFile="false"/>
+    <include file="/config/liquibase/changelog/load_constraints.xml" relativeToChangelogFile="false"/>
+    <include file="/config/liquibase/changelog/load_datas_csv.xml" relativeToChangelogFile="false"/>
+<!--    <include file="/config/liquibase/changelog/create_procedure_media.xml" relativeToChangelogFile="false"/>-->
+    <include file="/config/liquibase/changelog/create_view_avaliacoes_por_usuario.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

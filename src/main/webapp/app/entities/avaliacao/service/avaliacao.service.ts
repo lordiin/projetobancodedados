@@ -6,6 +6,8 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IAvaliacao, NewAvaliacao } from '../avaliacao.model';
+import { INotaMediaTurma } from '../../nota-media-turmas/nota-media-turma.model';
+import { IViewAvaliacao } from '../../view-avaliacoes/view-avaliacao.model';
 
 export type PartialUpdateAvaliacao = Partial<IAvaliacao> & Pick<IAvaliacao, 'id'>;
 
@@ -20,6 +22,10 @@ export class AvaliacaoService {
 
   create(avaliacao: NewAvaliacao): Observable<EntityResponseType> {
     return this.http.post<IAvaliacao>(this.resourceUrl, avaliacao, { observe: 'response' });
+  }
+
+  createAvaliacao(avaliacao: NewAvaliacao, turmaId: number): Observable<EntityResponseType> {
+    return this.http.post<IAvaliacao>(`${this.resourceUrl}/turma/${turmaId}`, avaliacao, { observe: 'response' });
   }
 
   update(avaliacao: IAvaliacao): Observable<EntityResponseType> {
@@ -69,5 +75,17 @@ export class AvaliacaoService {
       return [...avaliacaosToAdd, ...avaliacaoCollection];
     }
     return avaliacaoCollection;
+  }
+
+  findAllByTurmaId(turmaId: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IAvaliacao[]>(`${this.resourceUrl}/turma/${turmaId}`, { observe: 'response' });
+  }
+
+  getNotaMediaTurmas(): Observable<HttpResponse<INotaMediaTurma[]>> {
+    return this.http.get<INotaMediaTurma[]>(`${this.resourceUrl}/turmas/nota-media`, { observe: 'response' });
+  }
+
+  getViewAvaliacoes(): Observable<HttpResponse<IViewAvaliacao[]>> {
+    return this.http.get<IViewAvaliacao[]>(`${this.resourceUrl}/view/usuarios`, { observe: 'response' });
   }
 }

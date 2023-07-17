@@ -14,7 +14,7 @@
         <dd>
           <span>{{ departamento.id }}</span>
         </dd>
-        <dt><span>Codigo</span></dt>
+        <dt><span>Código</span></dt>
         <dd>
           <span>{{ departamento.codigo }}</span>
         </dd>
@@ -25,11 +25,16 @@
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Voltar</span>
       </button>
 
-      <button type="button" [routerLink]="['/departamento', departamento.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      <button
+        *jhiHasAnyAuthority="'ROLE_ADMIN'"
+        type="button"
+        [routerLink]="['/departamento', departamento.id, 'edit']"
+        class="btn btn-primary"
+      >
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Editar</span>
       </button>
     </div>
   </div>

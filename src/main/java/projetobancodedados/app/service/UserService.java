@@ -1,7 +1,10 @@
 package projetobancodedados.app.service;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import java.util.*;
 import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -22,6 +25,7 @@ import tech.jhipster.security.RandomUtil;
 /**
  * Service class for managing users.
  */
+@RequiredArgsConstructor
 @Service
 @Transactional
 public class UserService {
@@ -34,11 +38,8 @@ public class UserService {
 
     private final AuthorityRepository authorityRepository;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.authorityRepository = authorityRepository;
-    }
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public User registerUser(AdminUserDTO userDTO, String password) {
         userRepository
@@ -198,17 +199,23 @@ public class UserService {
                 if (email != null) {
                     user.setEmail(email.toLowerCase());
                 }
-                userRepository.save(
-                    user.getId(),
-                    user.getMatricula(),
-                    user.getImagem(),
-                    user.getImagemContentType(),
-                    user.getPassword(),
-                    user.getNome(),
-                    user.getSobrenome(),
-                    user.getEmail(),
-                    user.isActivated()
-                );
+                String nativeQuery =
+                    "UPDATE usuario SET matricula = :matricula, imagem = :imagem, imagem_content_type = :imagemContentType, password_hash = :password, " +
+                    "nome = :nome, sobrenome = :sobrenome, email = :email, activated = :activated WHERE id = :id";
+
+                entityManager
+                    .createNativeQuery(nativeQuery)
+                    .setParameter("matricula", user.getMatricula())
+                    .setParameter("imagem", user.getImagem())
+                    .setParameter("imagemContentType", user.getImagemContentType())
+                    .setParameter("password", user.getPassword())
+                    .setParameter("nome", user.getNome())
+                    .setParameter("sobrenome", user.getSobrenome())
+                    .setParameter("email", user.getEmail())
+                    .setParameter("activated", user.isActivated())
+                    .setParameter("id", user.getId())
+                    .executeUpdate();
+
                 log.debug("Changed Information for User: {}", user);
             });
     }

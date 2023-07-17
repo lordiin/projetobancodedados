@@ -33,6 +33,7 @@ export default class SettingsComponent implements OnInit {
     }),
 
     activated: new FormControl(initialAccount.activated, { nonNullable: true }),
+    id: new FormControl(initialAccount.id, { nonNullable: false }),
     authorities: new FormControl(initialAccount.authorities, { nonNullable: true }),
     matricula: new FormControl(initialAccount.matricula, { nonNullable: true }),
     imagem: new FormControl(initialAccount.imagem, { nonNullable: true }),
@@ -47,7 +48,6 @@ export default class SettingsComponent implements OnInit {
         this.settingsForm.patchValue(account);
         this.imagem.arquivo = account.imagem;
         this.imagem.contentType = account.imagemContentType;
-        console.log(this.imagem);
       }
     });
   }

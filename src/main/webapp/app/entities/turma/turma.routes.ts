@@ -6,6 +6,8 @@ import { TurmaDetailComponent } from './detail/turma-detail.component';
 import { TurmaUpdateComponent } from './update/turma-update.component';
 import TurmaResolve from './route/turma-routing-resolve.service';
 import { ASC } from 'app/config/navigation.constants';
+import { TurmaAvaliacoesComponent } from './avaliacoes/turma-avaliacoes.component';
+import turmaAvaliacoesResolve from './route/turma-avaliacoes-routing-resolve.service';
 
 const turmaRoute: Routes = [
   {
@@ -37,6 +39,14 @@ const turmaRoute: Routes = [
     component: TurmaUpdateComponent,
     resolve: {
       turma: TurmaResolve,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: ':id/avaliacoes',
+    component: TurmaAvaliacoesComponent,
+    resolve: {
+      turma: turmaAvaliacoesResolve,
     },
     canActivate: [UserRouteAccessService],
   },

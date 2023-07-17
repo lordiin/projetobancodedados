@@ -23,7 +23,7 @@ public class Denuncia implements Serializable {
     @Column(name = "motivo")
     private String motivo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties(value = { "turma" }, allowSetters = true)
     private Avaliacao avaliacao;
 

@@ -169,4 +169,15 @@ public class DenunciaResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    @PostMapping("/denuncias/avaliacao/{avaliacaoId}")
+    public ResponseEntity<Denuncia> createDenuncia(@RequestBody Denuncia denuncia, @PathVariable Long avaliacaoId)
+        throws URISyntaxException {
+        log.debug("REST request to save Denuncia : {}", denuncia);
+        if (denuncia.getId() != null) {
+            throw new BadRequestAlertException("A new denuncia cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        Denuncia result = denunciaService.saveDenuncia(denuncia, avaliacaoId);
+        return ResponseEntity.ok().body(result);
+    }
 }

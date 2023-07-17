@@ -25,4 +25,12 @@ export const EntityNavbarItems: NavbarItem[] = [
     name: 'Turma',
     route: '/turma',
   },
+  {
+    name: 'Media',
+    route: '/media',
+  },
+  {
+    name: 'Avaliações',
+    route: '/avaliacoes',
+  },
 ];

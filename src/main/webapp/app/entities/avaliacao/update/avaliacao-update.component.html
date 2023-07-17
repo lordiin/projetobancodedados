@@ -25,7 +25,9 @@
           <label class="form-label" for="field_turma">Turma</label>
           <select class="form-control" id="field_turma" data-cy="turma" name="turma" formControlName="turma" [compareWith]="compareTurma">
             <option [ngValue]="null"></option>
-            <option [ngValue]="turmaOption" *ngFor="let turmaOption of turmasSharedCollection">{{ turmaOption.id }}</option>
+            <option [ngValue]="turmaOption" *ngFor="let turmaOption of turmasSharedCollection">
+              {{ turmaOption.professor.nome }} - {{ turmaOption.disciplina.nome }}
+            </option>
           </select>
         </div>
       </div>
@@ -42,7 +44,7 @@
           [disabled]="editForm.invalid || isSaving"
           class="btn btn-primary"
         >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span>Salvar</span>
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Criar</span>
         </button>
       </div>
     </form>

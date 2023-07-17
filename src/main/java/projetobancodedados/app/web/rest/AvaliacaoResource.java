@@ -1,27 +1,25 @@
 package projetobancodedados.app.web.rest;
 
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import projetobancodedados.app.domain.Avaliacao;
+import projetobancodedados.app.domain.NotaMediaTurmas;
+import projetobancodedados.app.domain.ViewAvaliacaoUsuario;
 import projetobancodedados.app.repository.AvaliacaoRepository;
 import projetobancodedados.app.service.AvaliacaoService;
 import projetobancodedados.app.web.rest.errors.BadRequestAlertException;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
-import tech.jhipster.web.util.ResponseUtil;
 
 /**
  * REST controller for managing {@link projetobancodedados.app.domain.Avaliacao}.
@@ -171,5 +169,33 @@ public class AvaliacaoResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/avaliacaos/turma/{id}")
+    public ResponseEntity<List<Avaliacao>> getAllAvaliacaos(@PathVariable Long id) {
+        log.debug("REST request to get a page of Avaliacaos");
+        List<Avaliacao> result = avaliacaoService.findAllByTurma(id);
+        return ResponseEntity.ok().body(result);
+    }
+
+    @GetMapping("/avaliacaos/turmas/nota-media")
+    public ResponseEntity<List<NotaMediaTurmas>> getNotaMediaTurmas() {
+        log.debug("REST request to get NotaMedia");
+        List<NotaMediaTurmas> result = avaliacaoService.getNotaMediaTurmas();
+        return ResponseEntity.ok().body(result);
+    }
+
+    @GetMapping("/avaliacaos/view/usuarios")
+    public ResponseEntity<List<ViewAvaliacaoUsuario>> getAvaliacoesUsuario() {
+        log.debug("REST request to get View AvalicaoUsuario");
+        List<ViewAvaliacaoUsuario> result = avaliacaoService.getAvaliacoesUsuario();
+        return ResponseEntity.ok().body(result);
+    }
+
+    @PostMapping("/avaliacaos/turma/{turmaId}")
+    public ResponseEntity<Avaliacao> getAllAvaliacaos(@RequestBody Avaliacao avaliacao, @PathVariable Long turmaId) {
+        log.debug("REST request to create Avaliacao");
+        Avaliacao result = avaliacaoService.createAvaliacao(avaliacao, turmaId);
+        return ResponseEntity.ok().body(result);
     }
 }

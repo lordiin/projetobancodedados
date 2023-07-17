@@ -5,8 +5,8 @@ export interface IAvaliacao {
   id: number;
   descricao?: string | null;
   nota?: number | null;
-  turma?: Pick<ITurma, 'id'> | null;
-  user?: Pick<IUser, 'id'> | null;
+  turma?: ITurma;
+  user?: IUser;
 }
 
 export type NewAvaliacao = Omit<IAvaliacao, 'id'> & { id: null };

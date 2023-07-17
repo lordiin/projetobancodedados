@@ -25,17 +25,24 @@
         <dt><span>Departamento</span></dt>
         <dd>
           <div *ngIf="disciplina.departamento">
-            <a [routerLink]="['/departamento', disciplina.departamento.id, 'view']">{{ disciplina.departamento.id }}</a>
+            <a style="color: #3e8acc" [routerLink]="['/departamento', disciplina.departamento.id, 'view']">{{
+              disciplina.departamento.nome
+            }}</a>
           </div>
         </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Voltar</span>
       </button>
 
-      <button type="button" [routerLink]="['/disciplina', disciplina.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      <button
+        *jhiHasAnyAuthority="'ROLE_ADMIN'"
+        type="button"
+        [routerLink]="['/disciplina', disciplina.id, 'edit']"
+        class="btn btn-primary"
+      >
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Editar</span>
       </button>
     </div>
   </div>

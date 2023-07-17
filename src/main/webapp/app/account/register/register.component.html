@@ -21,30 +21,36 @@
     <div class="col-md-8">
       <form name="form" role="form" (ngSubmit)="register()" [formGroup]="registerForm" *ngIf="!success">
         <div class="mb-3">
-          <label class="form-label" for="login">Matrícula</label>
+          <label class="form-label" for="matricula">Matrícula</label>
           <input
             type="text"
             class="form-control"
-            id="login"
-            name="login"
+            id="matricula"
+            name="matricula"
             placeholder="Digite sua matrícula..."
-            formControlName="login"
+            formControlName="matricula"
             data-cy="username"
-            #login
+            #matricula
           />
 
-          <div *ngIf="registerForm.get('login')!.invalid && (registerForm.get('login')!.dirty || registerForm.get('login')!.touched)">
-            <small class="form-text text-danger" *ngIf="registerForm.get('login')?.errors?.required"> A matrícula é obrigatória. </small>
+          <div
+            *ngIf="
+              registerForm.get('matricula')!.invalid && (registerForm.get('matricula')!.dirty || registerForm.get('matricula')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="registerForm.get('matricula')?.errors?.required">
+              A matrícula é obrigatória.
+            </small>
 
-            <small class="form-text text-danger" *ngIf="registerForm.get('login')?.errors?.minlength">
+            <small class="form-text text-danger" *ngIf="registerForm.get('matricula')?.errors?.minlength">
               A matrícula tem que ter pelo menos 1 caractere.
             </small>
 
-            <small class="form-text text-danger" *ngIf="registerForm.get('login')?.errors?.maxlength">
+            <small class="form-text text-danger" *ngIf="registerForm.get('matricula')?.errors?.maxlength">
               A matrícula não pode ter mais que 10 caracteres.
             </small>
 
-            <small class="form-text text-danger" *ngIf="registerForm.get('login')?.errors?.pattern"> Sua matrícula é inválido. </small>
+            <small class="form-text text-danger" *ngIf="registerForm.get('matricula')?.errors?.pattern"> Sua matrícula é inválido. </small>
           </div>
         </div>
 

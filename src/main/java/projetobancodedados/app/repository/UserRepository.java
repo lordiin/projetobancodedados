@@ -30,7 +30,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Page<User> findAllByIdNotNullAndActivatedIsTrue(Pageable pageable);
 
     @Query(
-        value = "INSERT INTO jhi_user (matricula, imagem, imagem_content_type, password_hash, nome, sobrenome, email, activated, authorities) " +
+        value = "INSERT INTO usuario (matricula, imagem, imagem_content_type, password_hash, nome, sobrenome, email, activated, authorities) " +
         "VALUES (:matricula, :imagem, :imagemContentType, :password, :nome, :sobrenome, :email, :activated)",
         nativeQuery = true
     )
@@ -46,7 +46,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     );
 
     @Query(
-        value = "UPDATE jhi_user set matricula = :matricula, imagem = :imagem, imagem_content_type = :imagemContentType, password_hash = :password," +
+        value = "UPDATE usuario set matricula = :matricula, imagem = :imagem, imagem_content_type = :imagemContentType, password_hash = :password," +
         " nome = :nome, sobrenome = :sobrenome, email = :email, activated = :activated where id = :id",
         nativeQuery = true
     )
@@ -61,4 +61,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
         @Param("email") String email,
         @Param("activated") Boolean activated
     );
+
+    @Query(value = "select u.id from usuario u where u.matricula = :matricula", nativeQuery = true)
+    Long findUsuarioByMatricula(String matricula);
 }

@@ -1,11 +1,4 @@
-id;motivo
-1;perfect bait Diesel
-2;Gasoline Avon portals
-3;for
-4;because
-5;payment
-6;suburban Nebraska
-7;Cambridgeshire Southwest
-8;Cambridgeshire
-9;Congo pascal
-10;Industrial
+id;motivo;avaliacao_id
+1;Essa matéria é mó difícil, ele tá de sacanagem;1
+2;Ele está mentindo;2
+3;Essa matéria é mó difícil, ele tá zoando;2

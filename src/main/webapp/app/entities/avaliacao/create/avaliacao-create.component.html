@@ -1,0 +1,34 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()">
+      <h2 id="jhi-avaliacao-heading" data-cy="AvaliacaoCreateUpdateHeading">Criar uma Avaliação</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_descricao">Descrição</label>
+          <textarea [(ngModel)]="descricao" class="form-control" name="descricao" id="field_descricao" data-cy="descricao"></textarea>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Nota</label>
+          <br />
+          <div class="form-check form-check-inline" *ngFor="let i of [0, 1, 2, 3, 4, 5]">
+            <input class="form-check-input" type="radio" name="nota" id="radio_nota_{{ i }}" [(ngModel)]="nota" [value]="i" />
+            <label class="form-check-label" for="radio_nota_{{ i }}">{{ i }}</label>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancelar</span>
+        </button>
+
+        <button type="submit" id="save-entity" data-cy="entityCreateSaveButton" [disabled]="isSaving" class="btn btn-primary">
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Criar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 <nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand logo" routerLink="/avaliacao" (click)="collapseNavbar()">
+    <a class="navbar-brand logo" routerLink="/turma" (click)="collapseNavbar()">
       <span class="logo-img"></span>
       <span class="navbar-title">Avaliação de Turmas</span>
     </a>
@@ -27,41 +27,24 @@
           </a>
         </li>
         <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-          <a class="nav-link" routerLink="/avaliacao" (click)="collapseNavbar()">
-            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-            <span>Avaliação</span>
-          </a>
-        </li>
-        <li *jhiHasAnyAuthority="'ROLE_ADMIN'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-          <a class="nav-link" routerLink="/denuncia" (click)="collapseNavbar()">
-            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-            <span>Denúncia</span>
-          </a>
-        </li>
-        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-          <a class="nav-link" routerLink="/departamento" (click)="collapseNavbar()">
-            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-            <span>Departamento</span>
-          </a>
-        </li>
-        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-          <a class="nav-link" routerLink="/disciplina" (click)="collapseNavbar()">
-            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-            <span>Disciplina</span>
-          </a>
-        </li>
-        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-          <a class="nav-link" routerLink="/professor" (click)="collapseNavbar()">
-            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-            <span>Professor</span>
-          </a>
-        </li>
-        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <a class="nav-link" routerLink="/turma" (click)="collapseNavbar()">
             <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-            <span>Turma</span>
+            <span>Turmas</span>
           </a>
         </li>
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a class="nav-link" routerLink="/media" (click)="collapseNavbar()">
+            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+            <span>Média das Turmas</span>
+          </a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a class="nav-link" routerLink="/avaliacoes" (click)="collapseNavbar()">
+            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+            <span>Lista de Avaliações</span>
+          </a>
+        </li>
+
         <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
 
         <li
@@ -175,13 +158,6 @@
                 <span>User management</span>
               </a>
             </li>
-            <!--            <li *ngIf="openAPIEnabled">-->
-            <!--              <a class="dropdown-item" routerLink="/admin/docs" routerLinkActive="active" (click)="collapseNavbar()">-->
-            <!--                <fa-icon icon="book" [fixedWidth]="true"></fa-icon>-->
-            <!--                <span>API</span>-->
-            <!--              </a>-->
-            <!--            </li>-->
-            <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
           </ul>
         </li>
         <li
@@ -192,14 +168,10 @@
           [routerLinkActiveOptions]="{ exact: true }"
         >
           <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu" data-cy="accountMenu">
-            <!--            <span *ngIf="!account?.imageUrl">-->
             <span>
               <fa-icon icon="user"></fa-icon>
               <span>Conta</span>
             </span>
-            <!--            <span *ngIf="account?.imageUrl">-->
-            <!--              <img [src]="account!.imageUrl" class="profile-image rounded-circle" alt="Avatar" />-->
-            <!--            </span>-->
           </a>
           <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="account-menu">
             <li *ngSwitchCase="true">
