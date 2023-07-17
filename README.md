@@ -46,3 +46,41 @@ npm install
   `src/main/resources/config/liquibase/changelog`
 - Para logar na conta que é admin:
   `matricula: admin` `senha: admin`
+
+## Procedure e View
+
+### Construção da Procedure
+
+```
+CREATE OR REPLACE FUNCTION obter_nota_media_turma()
+  RETURNS TABLE (turma_id BIGINT, turma VARCHAR(255), nota_media NUMERIC)
+AS $$
+            BEGIN
+            RETURN QUERY
+            SELECT d.nome as nomeDisciplina, p.nome as nomeProfessor, AVG(a.nota) AS notaMedia
+            FROM turma t
+                     JOIN avaliacao a ON t.id = a.turma_id
+                     JOIN professor p on t.professor_id = p.id
+                     JOIN disciplina d on t.disciplina_id = d.id
+            GROUP BY d.nome, p.nome;
+            END;
+$$
+            LANGUAGE plpgsql;
+```
+
+### Construção da View
+
+```
+CREATE
+            OR REPLACE VIEW avaliacoes_por_usuario AS
+            SELECT u.id AS user_id,
+                   u.matricula,
+                   u.nome,
+                   u.sobrenome,
+                   a.id AS avaliacao_id,
+                   a.descricao,
+                   a.nota
+            FROM usuario u
+                     JOIN avaliacao a ON u.id = a.user_id
+            order by a.id desc;
+```
